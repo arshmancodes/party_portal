@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/router/route_generator.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,8 +12,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 void _navigateToHome() async {
-  await Future.delayed(Duration(milliseconds: 4000), () {});
-  Get.offAllNamed('/login');
+  await Future.delayed(const Duration(milliseconds: 4000), () {});
+  navigationController.getOffAll(login);
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -41,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 50,
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: Text(
                     'Party Portal',

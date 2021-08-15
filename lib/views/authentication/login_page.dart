@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/router/route_generator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,15 +14,17 @@ class LoginPage extends StatefulWidget {
 class _LogInState extends State<LoginPage> {
   bool pass21 = true;
   final _formKey = GlobalKey<FormState>();
+
 //  final SignInCntrl = LoginApiService();
-  TextEditingController namecntroller = new TextEditingController();
-  TextEditingController passwordcontroller = new TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
         backgroundColor: Colors.white,
@@ -42,7 +46,7 @@ class _LogInState extends State<LoginPage> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.only(left: 40, right: 40, top: 30),
+          padding: const EdgeInsets.only(left: 40, right: 40, top: 30),
           child: ListView(
             children: [
               // Stack(
@@ -56,7 +60,7 @@ class _LogInState extends State<LoginPage> {
               // ),
               Container(
                   alignment: Alignment.centerLeft,
-                  child: Text(
+                  child: const Text(
                     'Welcome',
                     style: TextStyle(
                         fontSize: 25,
@@ -64,10 +68,10 @@ class _LogInState extends State<LoginPage> {
                         color: Colors.black),
                   )),
               Padding(
-                padding: EdgeInsets.only(top: 7, left: 5),
+                padding: const EdgeInsets.only(top: 7, left: 5),
                 child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       'Please Login',
                       style: TextStyle(
                           color: Color(0xffCBCBCB),
@@ -76,11 +80,11 @@ class _LogInState extends State<LoginPage> {
                     )),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: Container(
                   color: Colors.white,
                   child: TextFormField(
-                    controller: namecntroller,
+                    controller: nameController,
                     keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -89,26 +93,26 @@ class _LogInState extends State<LoginPage> {
                       return null;
                     },
                     onSaved: (value) {},
-                    style: TextStyle(
+                    style:  const TextStyle(
                         color: Colors.black, fontFamily: 'SFUIDisplay'),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(21),
                         ),
                         labelText: 'Email',
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.person,
                           color: Color(0xFF604621),
                         ),
                         labelStyle:
-                            TextStyle(color: Color(0xFF787878), fontSize: 15)),
+                        const TextStyle(color: Color(0xFF787878), fontSize: 15)),
                   ),
                 ),
               ),
               Container(
                 color: Colors.white,
                 child: TextFormField(
-                  controller: passwordcontroller,
+                  controller: passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: pass21,
                   validator: (value) {
@@ -119,7 +123,7 @@ class _LogInState extends State<LoginPage> {
                   },
                   onSaved: (value) {},
                   style:
-                      TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
+                  const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(21),
@@ -139,17 +143,17 @@ class _LogInState extends State<LoginPage> {
                             pass21 == true
                                 ? Icons.lock_outline
                                 : Icons.lock_open_rounded,
-                            color: Color(0xFF604621),
+                            color:const  Color(0xFF604621),
                           )),
                       labelStyle:
-                          TextStyle(color: Color(0xFF787878), fontSize: 15)),
+                      const TextStyle(color: Color(0xFF787878), fontSize: 15)),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 15),
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed('/homepage');
+                    navigationController.navigateTo(homePage);
                     //  if (_formKey.currentState.validate()) {
                     //   var resonce = await SignInCntrl.SignINFun(namecntroller.text, passwordcontroller.text);
                     //   final snackBar1 = SnackBar(
@@ -192,16 +196,16 @@ class _LogInState extends State<LoginPage> {
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Color(0xff00B5F7),
+                      color: const Color(0xff00B5F7),
                       borderRadius: BorderRadius.circular(40),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: 50),
+                          padding: const EdgeInsets.only(right: 50),
                           child: Container(
-                              child: Text(
+                              child:const Text(
                             'Sign In',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
@@ -210,7 +214,7 @@ class _LogInState extends State<LoginPage> {
                           )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(right: 10),
+                          padding:const  EdgeInsets.only(right: 10),
                           child: Container(
                               child: Image.asset(
                             'assets/images/GoSign.png',
@@ -224,17 +228,17 @@ class _LogInState extends State<LoginPage> {
                 ),
               ),
 
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 5, left: 5),
                 child: Text('Forget Password?'),
               ),
 
               Padding(
-                padding: EdgeInsets.only(top: 220),
+                padding: const EdgeInsets.only(top: 220),
                 child: Center(
                   child: RichText(
                     text: TextSpan(children: [
-                      TextSpan(
+                      const TextSpan(
                           text: "Don't have an account?",
                           style: TextStyle(
                             fontFamily: 'SFUIDisplay',
@@ -243,14 +247,14 @@ class _LogInState extends State<LoginPage> {
                           )),
                       TextSpan(
                           text: "Sign Up",
-                          style: TextStyle(
+                          style:  const TextStyle(
                               fontFamily: 'SFUIDisplay',
                               color: Color(0xff4EB1FE),
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Get.toNamed('/signup');
+                              navigationController.navigateTo(signUp);
                             }),
                     ]),
                   ),

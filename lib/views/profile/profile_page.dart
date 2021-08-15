@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/router/route_generator.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -150,7 +152,7 @@ class _ProfileState extends State<ProfilePage> {
                     onTap: () {
                       setState(() {
                         //localdbservices.logout();
-                        Get.toNamed('/login');
+                        navigationController.getOffAll(login);
                       });
                     },
                     child: ListTile(

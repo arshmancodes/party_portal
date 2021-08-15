@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:party_portal/constants/controllers.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -12,12 +13,12 @@ class _SignUpState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   bool pass = true;
   bool pass2 = true;
-  TextEditingController namecntroller1 = new TextEditingController();
-  TextEditingController emailcntroller1 = new TextEditingController();
-  TextEditingController passwordcontroller1 = new TextEditingController();
-  TextEditingController cnpasswordcontroller1 = new TextEditingController();
-  TextEditingController agecontroller1 = new TextEditingController();
-  TextEditingController phonecontroller1 = new TextEditingController();
+  TextEditingController namecntroller1 = TextEditingController();
+  TextEditingController emailcntroller1 = TextEditingController();
+  TextEditingController passwordcontroller1 = TextEditingController();
+  TextEditingController cnpasswordcontroller1 = TextEditingController();
+  TextEditingController agecontroller1 = TextEditingController();
+  TextEditingController phonecontroller1 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -336,7 +337,7 @@ class _SignUpState extends State<SignupPage> {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Get.offAllNamed('/login');
+                              navigationController.goBack();
                             }),
                     ]),
                   ),

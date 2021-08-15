@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:party_portal/views/homePage.dart';
-import 'package:party_portal/views/loginPage.dart';
-import 'package:party_portal/views/profilePage.dart';
-import 'package:party_portal/views/signupPage.dart';
-import 'package:party_portal/views/splashscreen.dart';
+import 'package:party_portal/router/route_generator.dart';
+
+import 'constants/controllers.dart';
+import 'controllers/navigation_controller.dart';
 
 void main() {
-  runApp(MyApp());
+  Get.put(NavigationController());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   @override
   void initState() {
     super.initState();
@@ -26,13 +28,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: SplashScreen(),
-      getPages: [
-        GetPage(name: '/login', page: () => LoginPage()),
-        GetPage(name: '/profile', page: () => ProfilePage()),
-        GetPage(name: '/homepage', page: () => HomePage()),
-        GetPage(name: '/signup', page: () => SignupPage()),
-      ],
+      debugShowCheckedModeBanner: false,
+      initialRoute: initialRoute,
+      defaultTransition: Transition.zoom,
+      onGenerateRoute: RouteGenerator.onGeneratedRoutes,
+      navigatorKey: navigationController.navigationKey,
     );
   }
 }
