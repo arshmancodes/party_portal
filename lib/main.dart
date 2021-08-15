@@ -3,6 +3,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:party_portal/views/homePage.dart';
 import 'package:party_portal/views/loginPage.dart';
 import 'package:party_portal/views/profilePage.dart';
+import 'package:party_portal/views/signupPage.dart';
 import 'package:party_portal/views/splashscreen.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/profile', page: () => ProfilePage()),
         GetPage(name: '/homepage', page: () => HomePage()),
+        GetPage(name: '/signup', page: () => SignupPage()),
       ],
     );
   }

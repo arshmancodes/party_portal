@@ -11,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 
 void _navigateToHome() async {
   await Future.delayed(Duration(milliseconds: 4000), () {});
-  Get.toNamed('/login');
+  Get.offAllNamed('/login');
 }
 
 class _SplashScreenState extends State<SplashScreen> {

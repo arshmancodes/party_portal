@@ -250,7 +250,7 @@ class _LogInState extends State<LoginPage> {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              //  Get.to(SignUp());
+                              Get.toNamed('/signup');
                             }),
                     ]),
                   ),
