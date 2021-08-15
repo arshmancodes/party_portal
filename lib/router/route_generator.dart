@@ -1,20 +1,20 @@
-// STATIC ROUTES NAME
-
 import 'package:flutter/material.dart';
 import 'package:party_portal/views/home_page.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
 import 'package:party_portal/views/authentication/signup_page.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
 
+// STATIC ROUTES NAME
 const String initialRoute = '/';
 const String login = '/login';
 const String signUp = '/signup';
 const String homePage = '/home-page';
 
 
-// CONTROLLER FUNCTION THAT CONTROLS THE FLOW OF ROUTING
-class RouteGenerator {
+// TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
+class RouteGenerator {
+  // FUNCTION THAT HANDLES ROUTING
   static Route<dynamic> onGeneratedRoutes (RouteSettings settings){
     switch (settings.name){
       case initialRoute:
@@ -31,10 +31,12 @@ class RouteGenerator {
     }
   }
 
+  // FUNCTION THAT HANDLES NAVIGATION
   static PageRoute _getPageRoute(Widget child){
     return MaterialPageRoute(builder: (ctx) => child);
   }
 
+  // 404 PAGE
   static PageRoute _errorRoute(){
     return MaterialPageRoute(builder: (ctx){
       return Scaffold(
