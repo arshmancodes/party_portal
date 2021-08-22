@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663666237860",
+    "project_id": "partyportal-6b438",
+    "storage_bucket": "partyportal-6b438.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663666237860:android:f9392fc293f989edf5e131",
+        "android_client_info": {
+          "package_name": "com.codeminers.partyportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663666237860-komutm1djoli51i9d4nr2kfqq4ro9fhr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codeminers.partyportal",
+            "certificate_hash": "e43bb9337d27cc433eb306ea4dc8bcc86df38549"
+          }
+        },
+        {
+          "client_id": "663666237860-tu6hasq54g4mvbdcc7dp9b6bmldlvj60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSUrxCTLgcj8AfiNvCECNKjREySugo8kY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663666237860-tu6hasq54g4mvbdcc7dp9b6bmldlvj60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

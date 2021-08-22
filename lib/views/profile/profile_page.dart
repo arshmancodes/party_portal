@@ -10,7 +10,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileState extends State<ProfilePage> {
-//Localdbservices localdbservices = Localdbservices();
+
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,15 +23,6 @@ class _ProfileState extends State<ProfilePage> {
         elevation: 0,
         toolbarHeight: 80,
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/Welcome');
-          },
-        ),
         title: Image.asset(
           'assets/images/Create.png',
           width: 60,
@@ -39,17 +32,17 @@ class _ProfileState extends State<ProfilePage> {
       body: Stack(
         children: [
           Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
+            decoration: const BoxDecoration(
+              image:  DecorationImage(
                 image: AssetImage("assets/images/background.jpg"),
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
               // color: Colors.grey.withOpacity(0.88),
             ),
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 30, left: 40, bottom: 20),
+                  padding: const EdgeInsets.only(top: 30, left: 40, bottom: 20),
                   child: Text(
                     'Profile',
                     style: GoogleFonts.poppins(
@@ -59,7 +52,7 @@ class _ProfileState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                Center(
+                const Center(
                   child: CircleAvatar(
                     radius: 50.0,
                     backgroundImage: AssetImage('assets/images/MALE.png'),
@@ -77,7 +70,7 @@ class _ProfileState extends State<ProfilePage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Icon(
                       Icons.add_location,
                       color: Colors.blue,
@@ -87,13 +80,13 @@ class _ProfileState extends State<ProfilePage> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 40, left: 20),
+                  padding: const EdgeInsets.only(top: 40, left: 20),
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context)
                           .pushReplacementNamed('/NotificationScreen');
                     },
-                    child: ListTile(
+                    child: const ListTile(
                       leading: Icon(
                         Icons.notifications,
                         size: 25,
@@ -108,7 +101,7 @@ class _ProfileState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: ListTile(
                     leading: Icon(
@@ -125,13 +118,13 @@ class _ProfileState extends State<ProfilePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20),
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context)
                           .pushReplacementNamed('/RattingScreen');
                     },
-                    child: ListTile(
+                    child: const ListTile(
                       leading: Icon(
                         Icons.history,
                         size: 25,
@@ -147,15 +140,14 @@ class _ProfileState extends State<ProfilePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20),
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        //localdbservices.logout();
                         navigationController.getOffAll(login);
                       });
                     },
-                    child: ListTile(
+                    child: const ListTile(
                       leading: Icon(
                         Icons.logout,
                         color: Colors.red,

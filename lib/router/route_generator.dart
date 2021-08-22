@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:party_portal/views/home_page.dart';
+import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
 import 'package:party_portal/views/authentication/signup_page.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
@@ -8,7 +8,7 @@ import 'package:party_portal/views/splash/splash_screen.dart';
 const String initialRoute = '/';
 const String login = '/login';
 const String signUp = '/signup';
-const String homePage = '/home-page';
+const String mainRootPage = '/main-root-page';
 
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
@@ -23,8 +23,8 @@ class RouteGenerator {
         return _getPageRoute(LoginPage());
       case signUp:
         return _getPageRoute(SignupPage());
-      case homePage:
-        return _getPageRoute(const HomePage());
+      case mainRootPage:
+        return _getPageRoute(const BottomNavBar());
 
       default:
         return _errorRoute();

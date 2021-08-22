@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.party_portal">
+    package="com.codeminers.partyportal">
    <application
         android:label="party_portal"
         android:icon="@mipmap/ic_launcher">

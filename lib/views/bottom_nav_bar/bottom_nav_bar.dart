@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:party_portal/views/history_page.dart';
-import 'package:party_portal/views/home_view_page.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/views/bottom_nav_bar/history_page.dart';
+import 'package:party_portal/views/bottom_nav_bar/home_view_page.dart';
 import 'package:party_portal/views/profile/profile_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BottomNavBarState extends State<BottomNavBar> {
+
+
+  @override
+  void initState() {
+    if (authServiceController.currentUser.value?.uid != null) {
+      // Database().getUser(_authController.currentUser.value!.uid).then((value) {
+      //   _authController.loggedInUser.value = value;
+      // });
+      print('null');
+    }
+    super.initState();
+  }
+
+
   int _index = 0;
   PageController _pageController = PageController();
   List<Widget> _screens = [
@@ -36,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         controller: _pageController,
         children: _screens,
         onPageChanged: _onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,

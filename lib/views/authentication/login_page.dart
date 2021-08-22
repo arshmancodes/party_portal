@@ -15,28 +15,38 @@ class _LogInState extends State<LoginPage> {
   bool pass21 = true;
   final _formKey = GlobalKey<FormState>();
 
-//  final SignInCntrl = LoginApiService();
+  String? _userEmail, _userPassword;
 
-  TextEditingController nameController = TextEditingController();
+  void _trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+
+      //Login user on auth request
+
+      authServiceController.loginUser(_userEmail!, _userPassword!);
+    }
+  }
+
+
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.black,
         ),
         backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 60,
         centerTitle: true,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back_ios_sharp, color: Colors.black,),
-        //   onPressed: (){
-        //     Navigator.of(context).pushReplacementNamed('/Welcome');
-        //   },
-        // ),
         title: Image.asset(
           'assets/images/Create.png',
           width: 50,
@@ -49,15 +59,6 @@ class _LogInState extends State<LoginPage> {
           padding: const EdgeInsets.only(left: 40, right: 40, top: 30),
           child: ListView(
             children: [
-              // Stack(
-              //   children: [
-              //     Container(
-              //       alignment: Alignment.center,
-              //       height: 300,
-              //       child: Image.asset('assets/img/Welcome.png'),
-              //     ),
-              //   ],
-              // ),
               Container(
                   alignment: Alignment.centerLeft,
                   child: const Text(
@@ -84,15 +85,19 @@ class _LogInState extends State<LoginPage> {
                 child: Container(
                   color: Colors.white,
                   child: TextFormField(
-                    controller: nameController,
+                    textInputAction: TextInputAction.next,
+                    controller: emailController,
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your email';
+                      if (value!.isEmpty || !value.contains("@")) {
+                        return 'Please enter a valid email address';
                       }
                       return null;
                     },
-                    onSaved: (value) {},
+                    onSaved: (value) {
+                      _userEmail = value;
+                    },
+
                     style:  const TextStyle(
                         color: Colors.black, fontFamily: 'SFUIDisplay'),
                     decoration: InputDecoration(
@@ -112,6 +117,7 @@ class _LogInState extends State<LoginPage> {
               Container(
                 color: Colors.white,
                 child: TextFormField(
+                  textInputAction: TextInputAction.done,
                   controller: passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: pass21,
@@ -121,7 +127,9 @@ class _LogInState extends State<LoginPage> {
                     }
                     return null;
                   },
-                  onSaved: (value) {},
+                  onSaved: (value) {
+                    _userPassword = value;
+                  },
                   style:
                   const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
                   decoration: InputDecoration(
@@ -152,47 +160,7 @@ class _LogInState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: InkWell(
-                  onTap: () {
-                    navigationController.navigateTo(homePage);
-                    //  if (_formKey.currentState.validate()) {
-                    //   var resonce = await SignInCntrl.SignINFun(namecntroller.text, passwordcontroller.text);
-                    //   final snackBar1 = SnackBar(
-                    //     backgroundColor: Colors.blue,
-                    //
-                    //     content: Row(
-                    //
-                    //       children: [
-                    //         CircularProgressIndicator(),
-                    //         SizedBox(width: 11,),
-                    //         Text('Waiting'),
-                    //
-                    //       ],
-                    //     ),
-                    // duration: Duration(seconds: 1),
-                    //   );
-                    //   print(resonce);
-                    //   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
-                    //   if(resonce == "Invalid User"){
-                    //     final snackBar = SnackBar(
-                    //       backgroundColor: Colors.red,
-                    //       content: Row(
-                    //         children: [
-                    //           Icon(Icons.warning_amber_outlined,color: Colors.white,),
-                    //           SizedBox(width: 11,),
-                    //           Text('User Invalid'),
-                    //
-                    //         ],
-                    //       ),
-                    //       duration: Duration(seconds: 2),
-                    //     );
-                    //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    //   }
-                    //   else{
-                    //
-                    //     Get.to(SelectLogin());
-                    //   }
-                    //  }
-                  },
+                  onTap: _trySubmit,
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
@@ -234,12 +202,12 @@ class _LogInState extends State<LoginPage> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 220),
+                padding: const EdgeInsets.only(top: 15),
                 child: Center(
                   child: RichText(
                     text: TextSpan(children: [
                       const TextSpan(
-                          text: "Don't have an account?",
+                          text: "Don't have an account? ",
                           style: TextStyle(
                             fontFamily: 'SFUIDisplay',
                             color: Colors.black,

@@ -1,4 +1,4 @@
-package com.example.party_portal
+package com.codeminers.partyportal
 
 import io.flutter.embedding.android.FlutterActivity
 
