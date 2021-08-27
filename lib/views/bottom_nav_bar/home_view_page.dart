@@ -12,10 +12,18 @@ class _HomeViewPageState extends State<HomeViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Text('This is the main page of the home screen'),
-          ],
+        child: Center(
+          child: Column(
+            children: [
+              Center(
+                child: Image.asset(
+                  'assets/images/ss.png',
+                  width: 600,
+                  height: 600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

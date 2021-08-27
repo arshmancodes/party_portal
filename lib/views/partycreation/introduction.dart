@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/router/route_generator.dart';
 
 class IntroductionPage extends StatefulWidget {
   const IntroductionPage({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
             child: Column(
               children: [
                 Text(
-                  "Introduction",
+                  "Let's Meet the Host",
                   style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -74,7 +76,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   height: 200,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    navigationController.navigateTo(partyInfo);
+                  },
                   child: Image.asset('assets/images/createbtn.png'),
                 ),
               ],

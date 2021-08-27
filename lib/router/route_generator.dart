@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
 import 'package:party_portal/views/authentication/signup_page.dart';
+import 'package:party_portal/views/partycreation/drinks_selection.dart';
 import 'package:party_portal/views/partycreation/introduction.dart';
+import 'package:party_portal/views/partycreation/partyInfo.dart';
+import 'package:party_portal/views/partycreation/party_detail.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
 
 // STATIC ROUTES NAME
 const String initialRoute = '/';
 const String login = '/login';
+const String home = '/home';
 const String signUp = '/signup';
 const String mainRootPage = '/main-root-page';
 const String partySize = '/party-size';
 const String introPage = '/introduction';
+const String partyInfo = '/party-info';
+const String drinkSelection = '/drinkSelection';
+const String eventDetail = '/eventDetail';
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
@@ -32,6 +39,14 @@ class RouteGenerator {
         return _getPageRoute(const PartySize());
       case introPage:
         return _getPageRoute(const IntroductionPage());
+      case partyInfo:
+        return _getPageRoute(const PartyInfo());
+      case drinkSelection:
+        return _getPageRoute(DrinkSelection());
+      case home:
+        return _getPageRoute(BottomNavBar());
+      case eventDetail:
+        return _getPageRoute(EventDetail());
 
       default:
         return _errorRoute();
