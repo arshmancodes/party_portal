@@ -273,17 +273,43 @@ class _PortalPricingState extends State<PortalPricing> {
               Get.snackbar("Party Saved", "You have Saved this Party",
                   backgroundColor: Colors.green);
             },
-            child: Card(
-              elevation: 20,
-              color: Colors.blue[400],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: SizedBox(
-                width: 100,
-                height: 50,
-                child: Center(
-                  child: Text("Quick Portal - 0.99\$"),
+            child: InkWell(
+              onTap: () {
+                Get.defaultDialog(
+                  textConfirm: "Pay Now",
+                  title: "Auction Amount",
+                  onConfirm: () {
+                    navigationController.getOffAll(home);
+                    Get.snackbar("Payment Successful",
+                        'You have Successfully purchased the access',
+                        backgroundColor: Colors.green[300]);
+                  },
+                  content: Column(
+                    children: [
+                      Text("Pay Now to get Access"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("The total price will be: 0.99\$"),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Card(
+                elevation: 20,
+                color: Colors.blue[400],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: SizedBox(
+                  width: 100,
+                  height: 50,
+                  child: Center(
+                    child: Text("Quick Portal - 0.99\$"),
+                  ),
                 ),
               ),
             ),
@@ -294,17 +320,43 @@ class _PortalPricingState extends State<PortalPricing> {
               Get.snackbar("Party Saved", "You have Saved this Party",
                   backgroundColor: Colors.green);
             },
-            child: Card(
-              elevation: 20,
-              color: Colors.blue[400],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: SizedBox(
-                width: 100,
-                height: 50,
-                child: Center(
-                  child: Text("Platinum Portal Plan  - 4.99\$/mo"),
+            child: InkWell(
+              onTap: () {
+                Get.defaultDialog(
+                  textConfirm: "Pay Now",
+                  title: "Auction Amount",
+                  onConfirm: () {
+                    navigationController.getOffAll(home);
+                    Get.snackbar("Payment Successful",
+                        'You have Successfully purchased the access',
+                        backgroundColor: Colors.green[300]);
+                  },
+                  content: Column(
+                    children: [
+                      Text("Pay Now to get Access"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("The total price will be: 4.99\$"),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Card(
+                elevation: 20,
+                color: Colors.blue[400],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: SizedBox(
+                  width: 100,
+                  height: 50,
+                  child: Center(
+                    child: Text("Platinum Portal Plan  - 4.99\$/mo"),
+                  ),
                 ),
               ),
             ),
