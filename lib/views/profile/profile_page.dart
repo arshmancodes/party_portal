@@ -10,30 +10,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileState extends State<ProfilePage> {
-
-
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 80,
-        centerTitle: true,
-        title: Image.asset(
-          'assets/images/Create.png',
-          width: 60,
-          height: 60,
+        elevation: 10,
+        title: Center(
+          child: Text(
+            "Profile",
+            style: GoogleFonts.lobster(color: Colors.black, fontSize: 28),
+          ),
         ),
       ),
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
-              image:  DecorationImage(
+              image: DecorationImage(
                 image: AssetImage("assets/images/background.jpg"),
                 fit: BoxFit.contain,
               ),
@@ -41,16 +37,8 @@ class _ProfileState extends State<ProfilePage> {
             ),
             child: ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 40, bottom: 20),
-                  child: Text(
-                    'Profile',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w700,
-                      fontSize: size.width * 0.06,
-                      color: Colors.black,
-                    ),
-                  ),
+                SizedBox(
+                  height: 40,
                 ),
                 const Center(
                   child: CircleAvatar(

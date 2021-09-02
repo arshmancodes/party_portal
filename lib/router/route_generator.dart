@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:party_portal/views/bottom_nav_bar/auction_view.dart';
 import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
 import 'package:party_portal/views/authentication/signup_page.dart';
 import 'package:party_portal/views/partycreation/drinks_selection.dart';
 import 'package:party_portal/views/partycreation/introduction.dart';
+import 'package:party_portal/views/partycreation/join_party.dart';
 import 'package:party_portal/views/partycreation/partyInfo.dart';
 import 'package:party_portal/views/partycreation/party_detail.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
+import 'package:party_portal/views/partycreation/portal_pricing.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
+import 'package:party_portal/views/winningPages/arrive.dart';
+import 'package:party_portal/views/winningPages/guestIntroduction.dart';
+import 'package:party_portal/views/winningPages/winning_start.dart';
 
 // STATIC ROUTES NAME
 const String initialRoute = '/';
@@ -20,6 +26,12 @@ const String introPage = '/introduction';
 const String partyInfo = '/party-info';
 const String drinkSelection = '/drinkSelection';
 const String eventDetail = '/eventDetail';
+const String auctionView = '/auctionView';
+const String joinParty = '/joinParty';
+const String partyPricing = '/partyPricing';
+const String winningStart = '/WinningPage';
+const String guestIntro = '/guesIntro';
+const String arrivePage = '/arrivePage';
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
@@ -47,6 +59,18 @@ class RouteGenerator {
         return _getPageRoute(BottomNavBar());
       case eventDetail:
         return _getPageRoute(EventDetail());
+      case auctionView:
+        return _getPageRoute(AuctionView());
+      case joinParty:
+        return _getPageRoute(JoinParty());
+      case partyPricing:
+        return _getPageRoute(PortalPricing());
+      case winningStart:
+        return _getPageRoute(WinningStart());
+      case guestIntro:
+        return _getPageRoute(GuestIntro());
+      case arrivePage:
+        return _getPageRoute(ArrivePage());
 
       default:
         return _errorRoute();

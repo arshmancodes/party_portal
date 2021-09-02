@@ -1,16 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/router/route_generator.dart';
 
-class EventDetail extends StatefulWidget {
-  const EventDetail({Key? key}) : super(key: key);
+class PortalPricing extends StatefulWidget {
+  const PortalPricing({Key? key}) : super(key: key);
 
   @override
-  _EventDetailState createState() => _EventDetailState();
+  _PortalPricingState createState() => _PortalPricingState();
 }
 
-class _EventDetailState extends State<EventDetail> {
+class _PortalPricingState extends State<PortalPricing> {
   Widget image_carousel = new Container(
     // decoration: BoxDecoration(
     //   borderRadius: BorderRadius.circular(10.0)
@@ -35,22 +37,6 @@ class _EventDetailState extends State<EventDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 80,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/Welcome');
-          },
-        ),
-        // title:Image.asset('assets/img/Create.png', width: 60, height: 60,) ,
-      ),
       body: ListView(
         children: [
           Padding(
@@ -260,251 +246,69 @@ class _EventDetailState extends State<EventDetail> {
               style: TextStyle(fontSize: 10, color: Colors.black54),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
+          InkWell(
+            onTap: () {
+              navigationController.navigateTo(home);
+              Get.snackbar("Party Saved", "You have Saved this Party",
+                  backgroundColor: Colors.green);
+            },
+            child: Card(
+              elevation: 20,
+              color: Colors.blue[400],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
               ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Duration',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      '11:45:00 PM',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
+              child: SizedBox(
+                width: 100,
+                height: 50,
+                child: Center(
+                  child: Text("3 Portal/ Month FREE"),
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
+          InkWell(
+            onTap: () {
+              navigationController.navigateTo(home);
+              Get.snackbar("Party Saved", "You have Saved this Party",
+                  backgroundColor: Colors.green);
+            },
+            child: Card(
+              elevation: 20,
+              color: Colors.blue[400],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
               ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Location',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'America',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
+              child: SizedBox(
+                width: 100,
+                height: 50,
+                child: Center(
+                  child: Text("Quick Portal - 0.99\$"),
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
+          InkWell(
+            onTap: () {
+              navigationController.navigateTo(home);
+              Get.snackbar("Party Saved", "You have Saved this Party",
+                  backgroundColor: Colors.green);
+            },
+            child: Card(
+              elevation: 20,
+              color: Colors.blue[400],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
               ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'States',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'wasigton',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
+              child: SizedBox(
+                width: 100,
+                height: 50,
+                child: Center(
+                  child: Text("Platinum Portal Plan  - 4.99\$/mo"),
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Drink',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'All',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Members',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      '54',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 30.0),
-          //   child: InkWell(
-          //     onTap: () {
-          //       // Get.to(EventInfoNext());
-          //     },
-          //     child: Container(
-          //       height: 80,
-          //       width: 40,
-          //       decoration: BoxDecoration(
-          //         color: Colors.blue,
-          //         borderRadius: BorderRadius.circular(50),
-          //         border: Border.all(
-          //           color: Colors.yellow,
-          //         ),
-          //       ),
-          //       child: Center(
-          //         child: Text(
-          //           "Click Here to Follow\n    Martina's Party",
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //             fontSize: 20.0,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 30.0),
-          //   child: InkWell(
-          //       onTap: () {
-          //         navigationController.getOffAll(home);
-          //       },
-          //       child: Image.asset(
-          //         'assets/images/play.png',
-          //         width: 70,
-          //         height: 70,
-          //       )),
-          // ),
         ],
       ),
     );

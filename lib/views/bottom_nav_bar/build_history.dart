@@ -16,7 +16,7 @@ class _BuildHistoryState extends State<BuildHistory> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(6.0),
           child: SingleChildScrollView(
             child: Center(
               child: Column(

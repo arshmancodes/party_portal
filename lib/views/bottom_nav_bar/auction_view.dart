@@ -1,21 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/constants/sharedpref.dart';
 import 'package:party_portal/router/route_generator.dart';
 
-class HomeViewPage extends StatefulWidget {
-  const HomeViewPage({Key? key}) : super(key: key);
+class AuctionView extends StatefulWidget {
+  const AuctionView({Key? key}) : super(key: key);
 
   @override
-  _HomeViewPageState createState() => _HomeViewPageState();
+  _AuctionViewState createState() => _AuctionViewState();
 }
 
-class _HomeViewPageState extends State<HomeViewPage> {
+class _AuctionViewState extends State<AuctionView> {
   double _upperValue = 10;
   bool check1 = true;
   bool check2 = false;
@@ -26,8 +27,8 @@ class _HomeViewPageState extends State<HomeViewPage> {
   List allmyparties = [];
   fetchparties() async {
     var id = await localdbservices.getuserpassword();
-    var response =
-        await get(Uri.parse("http://18.210.113.69:1809/api/getParties/$id"));
+    var response = await http
+        .get(Uri.parse("http://18.210.113.69:1809/api/getParties/$id"));
     if (response.statusCode == 200) {
       var mydata = jsonDecode(response.body);
       // MyParties myParties = MyParties.fromJson(mydata);
@@ -107,55 +108,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 120),
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          check1 = true;
-                          check2 = false;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 125,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            topLeft: Radius.circular(30),
-                          ),
-                          color:
-                              check1 == true ? Color(0xff34C3F8) : Colors.white,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/Icons/female.png",
-                              color:
-                                  check1 == true ? Colors.white : Colors.black,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              "Female",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: size.width * 0.040,
-                                color: check1 == true
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
                   padding: const EdgeInsets.only(left: 100),
                   child: Container(
                     alignment: Alignment.topCenter,
@@ -212,10 +164,29 @@ class _HomeViewPageState extends State<HomeViewPage> {
               alignment: Alignment.topRight,
               child: GestureDetector(
                   onTap: () {
-                    navigationController.navigateTo(winningStart);
+                    Get.defaultDialog(
+                      title: "Auction Amount",
+                      textConfirm: "Confirm",
+                      onConfirm: () {
+                        navigationController.getOffAll(home);
+                        Get.snackbar("Bid Successful",
+                            'You have Successfully placed bid on the party',
+                            backgroundColor: Colors.green[300]);
+                      },
+                      content: Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: "Bidding Amount",
+                              hintText: "Any number",
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
-                  child: Image.asset("assets/Icons/yellow.png",
-                      height: size.width * 0.35, width: size.width * 0.29)),
+                  child: Image.asset("assets/Icons/smallstar.png",
+                      height: size.width * 0.25, width: size.width * 0.19)),
             ),
           ),
           Padding(
@@ -224,9 +195,27 @@ class _HomeViewPageState extends State<HomeViewPage> {
               alignment: Alignment.centerRight,
               child: GestureDetector(
                   onTap: () {
-                    navigationController.navigateTo(joinParty);
+                    Get.defaultDialog(
+                      title: "Auction Amount",
+                      onConfirm: () {
+                        navigationController.getOffAll(home);
+                        Get.snackbar("Bid Successful",
+                            'You have Successfully placed bid on the party',
+                            backgroundColor: Colors.green[300]);
+                      },
+                      content: Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: "Bidding Amount",
+                              hintText: "Any number",
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
-                  child: Image.asset("assets/Icons/purplegreen.png",
+                  child: Image.asset("assets/Icons/normalstar.png",
                       height: size.width * 0.25, width: size.width * 0.19)),
             ),
           ),
@@ -236,9 +225,27 @@ class _HomeViewPageState extends State<HomeViewPage> {
               alignment: Alignment.bottomCenter,
               child: GestureDetector(
                   onTap: () {
-                    navigationController.navigateTo(joinParty);
+                    Get.defaultDialog(
+                      title: "Auction Amount",
+                      onConfirm: () {
+                        navigationController.getOffAll(home);
+                        Get.snackbar("Bid Successful",
+                            'You have Successfully placed bid on the party',
+                            backgroundColor: Colors.green[300]);
+                      },
+                      content: Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: "Bidding Amount",
+                              hintText: "Any number",
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
-                  child: Image.asset("assets/Icons/red.png",
+                  child: Image.asset("assets/Icons/bigstar.png",
                       height: size.width * 0.25, width: size.width * 0.19)),
             ),
           ),
@@ -248,9 +255,27 @@ class _HomeViewPageState extends State<HomeViewPage> {
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                   onTap: () {
-                    navigationController.navigateTo(joinParty);
+                    Get.defaultDialog(
+                      title: "Auction Amount",
+                      onConfirm: () {
+                        navigationController.getOffAll(home);
+                        Get.snackbar("Bid Successful",
+                            'You have Successfully placed bid on the party',
+                            backgroundColor: Colors.green[300]);
+                      },
+                      content: Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: "Bidding Amount",
+                              hintText: "Any number",
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
-                  child: Image.asset("assets/Icons/greenshadow.png",
+                  child: Image.asset("assets/Icons/normalstar.png",
                       height: size.width * 0.55, width: size.width * 0.55)),
             ),
           ),

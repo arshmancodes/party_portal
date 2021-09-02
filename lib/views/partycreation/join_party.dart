@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/router/route_generator.dart';
 
-class EventDetail extends StatefulWidget {
-  const EventDetail({Key? key}) : super(key: key);
+class JoinParty extends StatefulWidget {
+  const JoinParty({Key? key}) : super(key: key);
 
   @override
-  _EventDetailState createState() => _EventDetailState();
+  _JoinPartyState createState() => _JoinPartyState();
 }
 
-class _EventDetailState extends State<EventDetail> {
+class _JoinPartyState extends State<JoinParty> {
   Widget image_carousel = new Container(
     // decoration: BoxDecoration(
     //   borderRadius: BorderRadius.circular(10.0)
@@ -465,46 +465,46 @@ class _EventDetailState extends State<EventDetail> {
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 30.0),
-          //   child: InkWell(
-          //     onTap: () {
-          //       // Get.to(EventInfoNext());
-          //     },
-          //     child: Container(
-          //       height: 80,
-          //       width: 40,
-          //       decoration: BoxDecoration(
-          //         color: Colors.blue,
-          //         borderRadius: BorderRadius.circular(50),
-          //         border: Border.all(
-          //           color: Colors.yellow,
-          //         ),
-          //       ),
-          //       child: Center(
-          //         child: Text(
-          //           "Click Here to Follow\n    Martina's Party",
-          //           style: TextStyle(
-          //             color: Colors.white,
-          //             fontSize: 20.0,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 30.0),
-          //   child: InkWell(
-          //       onTap: () {
-          //         navigationController.getOffAll(home);
-          //       },
-          //       child: Image.asset(
-          //         'assets/images/play.png',
-          //         width: 70,
-          //         height: 70,
-          //       )),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: InkWell(
+              onTap: () {
+                navigationController.navigateTo(partyPricing);
+              },
+              child: Container(
+                height: 80,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Colors.yellow,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Click Here to Follow\n    Martina's Party",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: InkWell(
+                onTap: () {
+                  navigationController.navigateTo(auctionView);
+                },
+                child: Image.asset(
+                  'assets/images/play.png',
+                  width: 70,
+                  height: 70,
+                )),
+          ),
         ],
       ),
     );
