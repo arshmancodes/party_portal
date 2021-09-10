@@ -71,8 +71,7 @@ class _ProfileState extends State<ProfilePage> {
                   padding: const EdgeInsets.only(top: 40, left: 20),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/NotificationScreen');
+                      navigationController.navigateTo(notificationScreen);
                     },
                     child: const ListTile(
                       leading: Icon(
@@ -89,19 +88,25 @@ class _ProfileState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.settings,
-                      size: 25,
-                    ),
-                    title: Text(
-                      'Profile Setting',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+                    Get.snackbar("Profile Settings",
+                        "Profile settings are under development and will be available to you soon.");
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.settings,
+                        size: 25,
+                      ),
+                      title: Text(
+                        'Profile Setting',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ),
@@ -109,8 +114,7 @@ class _ProfileState extends State<ProfilePage> {
                   padding: const EdgeInsets.only(left: 20),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/RattingScreen');
+                      navigationController.navigateTo(buildHistory);
                     },
                     child: const ListTile(
                       leading: Icon(

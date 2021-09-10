@@ -3,6 +3,7 @@ import 'package:party_portal/views/bottom_nav_bar/auction_view.dart';
 import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
 import 'package:party_portal/views/authentication/signup_page.dart';
+import 'package:party_portal/views/bottom_nav_bar/build_history.dart';
 import 'package:party_portal/views/partycreation/drinks_selection.dart';
 import 'package:party_portal/views/partycreation/introduction.dart';
 import 'package:party_portal/views/partycreation/join_party.dart';
@@ -10,6 +11,7 @@ import 'package:party_portal/views/partycreation/partyInfo.dart';
 import 'package:party_portal/views/partycreation/party_detail.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
 import 'package:party_portal/views/partycreation/portal_pricing.dart';
+import 'package:party_portal/views/profile/profile_notification.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
 import 'package:party_portal/views/winningPages/arrive.dart';
 import 'package:party_portal/views/winningPages/guestIntroduction.dart';
@@ -32,6 +34,8 @@ const String partyPricing = '/partyPricing';
 const String winningStart = '/WinningPage';
 const String guestIntro = '/guesIntro';
 const String arrivePage = '/arrivePage';
+const String notificationScreen = '/notificationScreen';
+const String buildHistory = '/buildHistory';
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
@@ -71,7 +75,10 @@ class RouteGenerator {
         return _getPageRoute(GuestIntro());
       case arrivePage:
         return _getPageRoute(ArrivePage());
-
+      case notificationScreen:
+        return _getPageRoute(NotificationScreen());
+      case buildHistory:
+        return _getPageRoute(BuildHistory());
       default:
         return _errorRoute();
     }
