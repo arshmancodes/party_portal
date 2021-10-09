@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:party_portal/router/route_generator.dart';
-
 import 'constants/controllers.dart';
 import 'controllers/authentication/auth_service_controller.dart';
 import 'controllers/navigation_controller.dart';

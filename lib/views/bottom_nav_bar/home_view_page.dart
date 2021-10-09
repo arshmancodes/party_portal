@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
+import 'package:location/location.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/constants/sharedpref.dart';
 import 'package:party_portal/router/route_generator.dart';
@@ -16,6 +19,9 @@ class HomeViewPage extends StatefulWidget {
 }
 
 class _HomeViewPageState extends State<HomeViewPage> {
+  bool? _serviceEnabled;
+  PermissionStatus? _permissionGranted;
+  LocationData? _locationData;
   double _upperValue = 10;
   bool check1 = true;
   bool check2 = false;
@@ -24,6 +30,10 @@ class _HomeViewPageState extends State<HomeViewPage> {
   GoogleMapController? mapController;
   Map<MarkerId, Marker> marker = <MarkerId, Marker>{};
   List allmyparties = [];
+  LocationData? currentlocation;
+  var location = new Location();
+  late double lat;
+  late double long;
   fetchparties() async {
     var id = await localdbservices.getuserpassword();
     var response =
@@ -50,15 +60,64 @@ class _HomeViewPageState extends State<HomeViewPage> {
   // Future future;
   @override
   void initState() {
-    // TODO: implement initState
+    getLocation();
+    print("Location print ${currentlocation}");
     super.initState();
     // future = fetchparties();
+  }
+
+  void getLocation() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled!) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled!) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    currentlocation = await location.getLocation();
+    lat = currentlocation!.latitude!;
+    long = currentlocation!.longitude!;
+    print(lat);
+    print(long);
+    setState(() {});
+  }
+
+  //   CameraPosition _kGooglePlex = CameraPosition(
+  //   target: LatLng(lat, long),
+  //   zoom: 14.4746,
+  // );
+
+  final Completer<GoogleMapController> _controller = Completer();
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(lat, long),
+          zoom: 15,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.gps_fixed),
+          onPressed: () {
+            _goToTheLake();
+          }),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -78,30 +137,16 @@ class _HomeViewPageState extends State<HomeViewPage> {
       ),
       body: Stack(
         children: [
-          FutureBuilder(
-              //future: future,
-              builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GoogleMap(
-                minMaxZoomPreference:
-                    MinMaxZoomPreference(_upperValue, _upperValue),
-                initialCameraPosition: CameraPosition(
-                    target: LatLng(30.53996480119752, 70.26455917547194),
-                    zoom: _upperValue),
-                mapType: MapType.terrain,
-                /* scrollGesturesEnabled: true,
-                  rotateGesturesEnabled: true,
-                  zoomGesturesEnabled: true,*/
-                zoomControlsEnabled: false,
-                zoomGesturesEnabled: true,
-                markers: Set.from(marker.values),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(lat, long),
+              zoom: 15,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Stack(
@@ -121,7 +166,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                         height: 40,
                         width: 125,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(30),
                             topLeft: Radius.circular(30),
                           ),
@@ -136,7 +181,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                               color:
                                   check1 == true ? Colors.white : Colors.black,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             Text(
