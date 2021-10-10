@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/views/authentication/auth_decider.dart';
 import 'package:party_portal/views/bottom_nav_bar/auction_view.dart';
 import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
@@ -19,9 +21,11 @@ import 'package:party_portal/views/winningPages/winning_start.dart';
 
 // STATIC ROUTES NAME
 const String initialRoute = '/';
+const String authDecider = '/auth-decider';
 const String login = '/login';
 const String home = '/home';
 const String signUp = '/signup';
+const String signOut = '/sign-out';
 const String mainRootPage = '/main-root-page';
 const String partySize = '/party-size';
 const String introPage = '/introduction';
@@ -37,6 +41,8 @@ const String arrivePage = '/arrivePage';
 const String notificationScreen = '/notificationScreen';
 const String buildHistory = '/buildHistory';
 
+
+
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
 class RouteGenerator {
@@ -47,6 +53,8 @@ class RouteGenerator {
         return _getPageRoute(SplashScreen());
       case login:
         return _getPageRoute(LoginPage());
+      case authDecider:
+        return _getPageRoute(const AuthDecider());
       case signUp:
         return _getPageRoute(SignupPage());
       case mainRootPage:
@@ -79,6 +87,9 @@ class RouteGenerator {
         return _getPageRoute(NotificationScreen());
       case buildHistory:
         return _getPageRoute(BuildHistory());
+      case signOut:
+        authController.logOutUser();
+        return _getPageRoute(SignupPage());
       default:
         return _errorRoute();
     }

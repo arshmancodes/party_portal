@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:party_portal/constants/colors.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/constants/custom_snackbar.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,14 +25,21 @@ class _LogInState extends State<LoginPage> {
     FocusScope.of(context).unfocus();
 
     if (isValid) {
-      _formKey.currentState!.save();
+      // CALL LOGIN METHOD
+      authController.loginUser(emailController.text,passwordController.text).then((response){
 
-      //Login user on auth request
+        if(response.statusCode == 200){
+          navigationController.getOffAll(mainRootPage);
+          CustomSnackBar.showSnackBar(title: 'Login Successful', message: '', backgroundColor: snackBarSuccess);
+        }else{
+          String message = jsonDecode(response.body)['error'];
+          CustomSnackBar.showSnackBar(title: message, message: '', backgroundColor: snackBarError);
+        }
 
-      authServiceController.loginUser(_userEmail!, _userPassword!);
+      });
+
     }
   }
-
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
