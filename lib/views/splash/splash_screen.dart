@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:party_portal/constants/controllers.dart';
-import 'package:party_portal/controllers/authentication/auth_service_controller.dart';
+import 'package:party_portal/controllers/authentication/auth_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,16 +12,12 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-void _navigateToHome() async {
-  await Future.delayed(const Duration(milliseconds: 4000), () {});
-  Get.find<AuthServiceController>().currentUser.value?.uid != null ? navigationController.getOffAll(mainRootPage) : navigationController.getOffAll(login);
-}
-
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    _navigateToHome();
     super.initState();
+    Timer(const Duration(seconds: 4),
+            () => navigationController.getOffAll(authDecider));
   }
 
   @override

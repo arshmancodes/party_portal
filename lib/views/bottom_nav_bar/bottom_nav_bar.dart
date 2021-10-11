@@ -18,12 +18,6 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
-    if (authServiceController.currentUser.value?.uid != null) {
-      // Database().getUser(_authController.currentUser.value!.uid).then((value) {
-      //   _authController.loggedInUser.value = value;
-      // });
-      print('null');
-    }
     super.initState();
   }
 

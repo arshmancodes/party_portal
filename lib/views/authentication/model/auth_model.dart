@@ -1,21 +1,37 @@
 class AuthModel {
 
-  String? uid;
-  String? email;
+  String? mongodbId;
   String? name;
+  String? email;
+  String? phoneNumber;
+  String? imageUrl;
+  String? fcmToken;
   int? age;
-  int? phoneNumber;
+  // List<Address>? address;
+  // PaymentCard? paymentCard;
 
+  AuthModel(
+      {
+        this.mongodbId,
+        this.name,
+        this.email,
+        this.phoneNumber,
+        this.imageUrl,
+        this.fcmToken,
+        this.age,
+        // this.address,
+        // this.paymentCard
+      });
 
-  AuthModel({this.uid, this.email, this.name, this.age, this.phoneNumber});
-
-  AuthModel.fromJson(Map<String, dynamic> json){
-      uid = json['uid'];
-      email = json['email'];
-      name = json['name'];
-      age = json['age'];
-      phoneNumber = json['phoneNumber'];
+  AuthModel.fromJson(Map<String, dynamic> json) {
+    mongodbId = json['_id'];
+    name = json['username'];
+    email = json['email'];
+    phoneNumber = json['phoneNumber'];
+    imageUrl = json['imageUrl'];
+    fcmToken = json['fcmToken'];
+    age = json['age'];
+    // address = json['address'];
+    // paymentCard = json['paymentCard'];
   }
-
-  // Map<String, dynamic> toJson() => {'id':id, 'name':name };
 }

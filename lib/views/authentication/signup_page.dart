@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:party_portal/constants/colors.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/constants/custom_snackbar.dart';
 import 'package:party_portal/views/authentication/model/auth_model.dart';
 
 class SignupPage extends StatefulWidget {
@@ -37,8 +41,31 @@ class _SignUpState extends State<SignupPage> {
 
     if (isValid) {
       _formKey.currentState!.save();
-      // Create user on auth request
-      authServiceController.createUser(_userEmail!, _userPassword!, _userName!, int.parse(_userAge!), int.parse(_userPhone!));
+      // IF THE DATA IS VALIDATED, TAKE USER TO OTP SCREEN FOR CONFIRMATION
+      authController
+          .registerUser(
+          _userName!,
+          _userEmail!,
+          _userPassword!,
+          _userPhone!, int.parse(_userAge!))
+          .then((response) {
+
+        if (response.statusCode == 200) {
+          String message = jsonDecode(response.body)['message'];
+          navigationController.goBack();
+          CustomSnackBar.showSnackBar(
+              title: message, message: '', backgroundColor: snackBarSuccess);
+
+        } else if (response.statusCode == 500) {
+          String message = jsonDecode(response.body)['message'];
+          CustomSnackBar.showSnackBar(
+              title: message, message: '', backgroundColor: snackBarError);
+        } else {
+          String message = jsonDecode(response.body)['error'];
+          CustomSnackBar.showSnackBar(
+              title: message, message: '', backgroundColor: snackBarError);
+        }
+      });
     }
   }
 

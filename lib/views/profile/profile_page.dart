@@ -47,14 +47,14 @@ class _ProfileState extends State<ProfilePage> {
                   ),
                 ),
                 Center(
-                  child: Text(
-                    'Martina John',
+                  child: Obx(() => Text(
+                    '${authController.currentUser.value.name}',
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: size.width * 0.05,
                       color: Colors.black,
                     ),
-                  ),
+                  )),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
