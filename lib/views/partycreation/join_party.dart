@@ -46,7 +46,7 @@ class _JoinPartyState extends State<JoinParty> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/Welcome');
+            Navigator.pop(context);
           },
         ),
         // title:Image.asset('assets/img/Create.png', width: 60, height: 60,) ,

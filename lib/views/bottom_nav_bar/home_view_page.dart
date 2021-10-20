@@ -9,6 +9,7 @@ import 'package:http/http.dart';
 import 'package:location/location.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/constants/sharedpref.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class HomeViewPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
   bool check1 = true;
   bool check2 = false;
   Localdbservices localdbservices = Localdbservices();
+  final controller = Get.put(PartyController());
   ImageConfiguration? img;
   GoogleMapController? mapController;
   Map<MarkerId, Marker> marker = <MarkerId, Marker>{};
@@ -57,10 +59,15 @@ class _HomeViewPageState extends State<HomeViewPage> {
     return allmyparties;
   }
 
+  List<Marker> allmarkers = <Marker>[].obs;
+  BitmapDescriptor? pinLocationIcon;
+  final Completer<GoogleMapController> _controller = Completer();
+  bool loaded = false;
   // Future future;
   @override
   void initState() {
     getLocation();
+    controller.getParties();
     print("Location print ${currentlocation}");
     super.initState();
     // future = fetchparties();
@@ -87,37 +94,38 @@ class _HomeViewPageState extends State<HomeViewPage> {
     long = currentlocation!.longitude!;
     print(lat);
     print(long);
-    setState(() {});
-  }
+    loaded = true;
 
-  //   CameraPosition _kGooglePlex = CameraPosition(
-  //   target: LatLng(lat, long),
-  //   zoom: 14.4746,
-  // );
-
-  final Completer<GoogleMapController> _controller = Completer();
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(lat, long),
-          zoom: 15,
-        ),
+    allmarkers.add(
+      Marker(
+        markerId: MarkerId('myMarker'),
+        draggable: false,
+        onTap: () {
+          navigationController.navigateTo(joinParty);
+        },
+        position: LatLng(lat, long),
       ),
     );
+    allmarkers.add(
+      Marker(
+        markerId: MarkerId('myMarker'),
+        draggable: false,
+        onTap: () {
+          navigationController.navigateTo(joinParty);
+        },
+        position: LatLng(lat + 0.009, long),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      ),
+    );
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.gps_fixed),
-          onPressed: () {
-            _goToTheLake();
-          }),
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.gps_fixed), onPressed: () {}),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -137,16 +145,19 @@ class _HomeViewPageState extends State<HomeViewPage> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(lat, long),
-              zoom: 15,
-            ),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-          ),
+          (loaded)
+              ? GoogleMap(
+                  markers: Set.from(allmarkers),
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(lat, long),
+                    zoom: 15,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                )
+              : CircularProgressIndicator(),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Stack(
@@ -247,56 +258,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
                   ),
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 150,
-            ),
-            child: Container(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                  onTap: () {
-                    navigationController.navigateTo(winningStart);
-                  },
-                  child: Image.asset("assets/Icons/yellow.png",
-                      height: size.width * 0.35, width: size.width * 0.29)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 250),
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                  onTap: () {
-                    navigationController.navigateTo(joinParty);
-                  },
-                  child: Image.asset("assets/Icons/purplegreen.png",
-                      height: size.width * 0.25, width: size.width * 0.19)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 220),
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: GestureDetector(
-                  onTap: () {
-                    navigationController.navigateTo(joinParty);
-                  },
-                  child: Image.asset("assets/Icons/red.png",
-                      height: size.width * 0.25, width: size.width * 0.19)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 100),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                  onTap: () {
-                    navigationController.navigateTo(joinParty);
-                  },
-                  child: Image.asset("assets/Icons/greenshadow.png",
-                      height: size.width * 0.55, width: size.width * 0.55)),
             ),
           ),
           Padding(
