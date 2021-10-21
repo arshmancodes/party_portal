@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:party_portal/models/partymodel.dart';
 
 class PartyController extends GetxController {
+  final party = PartyModel();
+
   void getParties() async {
     Uri url = Uri.parse('http://192.168.100.58:3000/');
 
@@ -14,4 +17,6 @@ class PartyController extends GetxController {
       print(e);
     }
   }
+
+  void postParty() async {}
 }

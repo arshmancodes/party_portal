@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class PartyInfo extends StatefulWidget {
@@ -14,6 +15,7 @@ class PartyInfo extends StatefulWidget {
 }
 
 class _PartyInfoState extends State<PartyInfo> {
+  final controller = Get.find<PartyController>();
   TextEditingController where = TextEditingController();
   String? when;
   String? HLong;
@@ -45,6 +47,7 @@ class _PartyInfoState extends State<PartyInfo> {
                 time = value;
                 formated = DateFormat("yMd").format(time);
                 when = formated.toString();
+                controller.party.startingDate = when;
               });
             },
           ),
@@ -67,12 +70,13 @@ class _PartyInfoState extends State<PartyInfo> {
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           height: 250,
           child: CupertinoTimerPicker(
-            mode: CupertinoTimerPickerMode.ms,
+            mode: CupertinoTimerPickerMode.hms,
             onTimerDurationChanged: (value) {
               setState(() {
                 thistime = value;
                 timeformated = thistime.toString();
                 HLong = timeformated.toString();
+                controller.party.howLong = HLong;
               });
             },
           ),
@@ -210,7 +214,8 @@ class _PartyInfoState extends State<PartyInfo> {
                                   color: Colors.black,
                                   fontFamily: 'SFUIDisplay'),
                               decoration: InputDecoration(
-                                hintText: "Select your location",
+                                enabled: false,
+                                hintText: "Your Current location will be used",
                                 hintStyle: GoogleFonts.openSans(
                                     //fontFamily: "Open Sans",
                                     fontWeight: FontWeight.w400,

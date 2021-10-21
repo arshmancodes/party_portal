@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
 
@@ -13,6 +14,8 @@ class CreateParty extends StatefulWidget {
 }
 
 class _CreatePartyState extends State<CreateParty> {
+  final controller = Get.find<PartyController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

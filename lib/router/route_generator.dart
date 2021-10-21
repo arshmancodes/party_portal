@@ -9,7 +9,7 @@ import 'package:party_portal/views/bottom_nav_bar/build_history.dart';
 import 'package:party_portal/views/partycreation/drinks_selection.dart';
 import 'package:party_portal/views/partycreation/introduction.dart';
 import 'package:party_portal/views/partycreation/join_party.dart';
-import 'package:party_portal/views/partycreation/partyInfo.dart';
+import 'package:party_portal/views/partycreation/party_info.dart';
 import 'package:party_portal/views/partycreation/party_detail.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
 import 'package:party_portal/views/partycreation/portal_pricing.dart';
@@ -40,8 +40,6 @@ const String guestIntro = '/guesIntro';
 const String arrivePage = '/arrivePage';
 const String notificationScreen = '/notificationScreen';
 const String buildHistory = '/buildHistory';
-
-
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 

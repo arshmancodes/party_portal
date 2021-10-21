@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class PartySize extends StatefulWidget {
@@ -11,6 +13,10 @@ class PartySize extends StatefulWidget {
 }
 
 class _PartySizeState extends State<PartySize> {
+  final controller = Get.find<PartyController>();
+  TextEditingController hosts = TextEditingController();
+  TextEditingController guests = TextEditingController();
+
   bool small = true;
   bool medium = false;
   bool large = false;
@@ -18,6 +24,7 @@ class _PartySizeState extends State<PartySize> {
   @override
   void initState() {
     size = "small";
+    controller.party.partySize = size;
     super.initState();
   }
 
@@ -82,7 +89,9 @@ class _PartySizeState extends State<PartySize> {
                                       medium = false;
                                       large = false;
                                     });
+
                                     size = 'small';
+                                    controller.party.partySize = size;
                                   },
                                   child: Container(
                                     height: 50,
@@ -124,6 +133,7 @@ class _PartySizeState extends State<PartySize> {
                                       large = false;
                                     });
                                     size = 'medium';
+                                    controller.party.partySize = size;
                                   },
                                   child: Container(
                                     height: 50,
@@ -165,6 +175,7 @@ class _PartySizeState extends State<PartySize> {
                                       large = true;
                                     });
                                     size = 'large';
+                                    controller.party.partySize = size;
                                   },
                                   child: Container(
                                     height: 50,
@@ -221,7 +232,9 @@ class _PartySizeState extends State<PartySize> {
                               width: 150,
                               height: 200,
                             ),
-                            TextField(),
+                            TextField(
+                              controller: hosts,
+                            ),
                           ],
                         ),
                       ),
@@ -242,7 +255,9 @@ class _PartySizeState extends State<PartySize> {
                               width: 150,
                               height: 200,
                             ),
-                            TextField(),
+                            TextField(
+                              controller: guests,
+                            ),
                           ],
                         ),
                       ),
@@ -250,6 +265,8 @@ class _PartySizeState extends State<PartySize> {
                   ),
                   InkWell(
                     onTap: () {
+                      controller.party.hostCount = int.parse(hosts.text);
+                      controller.party.guestCount = int.parse(guests.text);
                       navigationController.navigateTo(introPage);
                     },
                     child: Image.asset('assets/images/createbtn.png'),

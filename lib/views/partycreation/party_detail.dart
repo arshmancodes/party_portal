@@ -11,7 +11,7 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
-  Widget image_carousel = new Container(
+  Widget image_carousel = Container(
     // decoration: BoxDecoration(
     //   borderRadius: BorderRadius.circular(10.0)
     // ),

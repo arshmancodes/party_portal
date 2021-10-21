@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class DrinkSelection extends StatefulWidget {
@@ -12,16 +13,22 @@ class DrinkSelection extends StatefulWidget {
 }
 
 class _DrinkSelectionState extends State<DrinkSelection> {
+  final controller = Get.find<PartyController>();
+  TextEditingController drinks = TextEditingController();
+  TextEditingController games = TextEditingController();
   bool small = true;
   bool medium = false;
   bool large = false;
   String? size;
+
   @override
   void initState() {
     size = "small";
     super.initState();
   }
 
+  var list = <String>[];
+  var gamelist = <String>[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,12 +54,22 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                   height: 100,
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Select",
-                    style: TextStyle(color: Colors.black),
+                Container(
+                  width: 200,
+                  child: TextField(
+                    controller: drinks,
+                    decoration: InputDecoration(
+                      label: Text("Enter a Drink name and Press Add"),
+                    ),
                   ),
+                ),
+                ElevatedButton(
+                  child: Text("Add"),
+                  onPressed: () {
+                    list.add(drinks.text);
+                    drinks.clear();
+                    controller.party.drinks = list;
+                  },
                 ),
                 Text(
                   "Games?",
@@ -67,6 +84,26 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                   height: 100,
                 ),
                 SizedBox(height: 20),
+                Container(
+                  width: 200,
+                  child: TextField(
+                    controller: games,
+                    decoration: InputDecoration(
+                      label: Text("Enter a Game name and Press Add"),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  child: Text("Add"),
+                  onPressed: () {
+                    gamelist.add(games.text);
+                    games.clear();
+                    controller.party.games = gamelist;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text(
@@ -114,7 +151,8 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                                     medium = false;
                                     large = false;
                                   });
-                                  size = 'small';
+                                  size = 'MA';
+                                  controller.party.partyRating = size;
                                 },
                                 child: Container(
                                   height: 50,
@@ -155,7 +193,8 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                                     medium = true;
                                     large = false;
                                   });
-                                  size = 'medium';
+                                  size = 'R';
+                                  controller.party.partyRating = size;
                                 },
                                 child: Container(
                                   height: 50,
@@ -196,7 +235,8 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                                     medium = false;
                                     large = true;
                                   });
-                                  size = 'large';
+                                  size = 'PG-13';
+                                  controller.party.partyRating = size;
                                 },
                                 child: Container(
                                   height: 50,

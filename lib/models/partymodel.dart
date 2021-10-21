@@ -3,14 +3,15 @@ class PartyModel {
   String? partySize;
   int? hostCount;
   int? guestCount;
-  List<String>? partyImages;
+  List<String?>? partyImages = [];
   String? partyInfo;
   String? startingDate;
   String? endingDate;
   Location? location;
-  List<String>? drinks;
-  List<String>? games;
+  List<String>? drinks = [];
+  List<String>? games = [];
   String? partyRating;
+  String? howLong;
 
   PartyModel(
       {this.createdBy,
@@ -24,14 +25,15 @@ class PartyModel {
       this.location,
       this.drinks,
       this.games,
-      this.partyRating});
+      this.partyRating,
+      this.howLong});
 
   PartyModel.fromJson(Map<String, dynamic> json) {
     createdBy = json['createdBy'];
     partySize = json['partySize'];
     hostCount = json['hostCount'];
     guestCount = json['guestCount'];
-    partyImages = json['partyImages'].cast<String>();
+    partyImages = json['partyImages'];
     partyInfo = json['partyInfo'];
     startingDate = json['startingDate'];
     endingDate = json['endingDate'];
@@ -41,6 +43,7 @@ class PartyModel {
     drinks = json['drinks'].cast<String>();
     games = json['games'].cast<String>();
     partyRating = json['partyRating'];
+    howLong = json['howLong'];
   }
 
   Map<String, dynamic> toJson() {
