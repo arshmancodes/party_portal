@@ -33,13 +33,11 @@ class PartyModel {
     partySize = json['partySize'];
     hostCount = json['hostCount'];
     guestCount = json['guestCount'];
-    partyImages = json['partyImages'];
+    partyImages = List<String>.from(json["partyImages"].map((x) => x));
     partyInfo = json['partyInfo'];
     startingDate = json['startingDate'];
     endingDate = json['endingDate'];
-    location = json['location'] != null
-        ? new Location.fromJson(json['location'])
-        : null;
+    location = new Location.fromJson(json['location']);
     drinks = json['drinks'].cast<String>();
     games = json['games'].cast<String>();
     partyRating = json['partyRating'];

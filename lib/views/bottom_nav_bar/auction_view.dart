@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/constants/sharedpref.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class AuctionView extends StatefulWidget {
@@ -25,28 +26,8 @@ class _AuctionViewState extends State<AuctionView> {
   GoogleMapController? mapController;
   Map<MarkerId, Marker> marker = <MarkerId, Marker>{};
   List allmyparties = [];
-  fetchparties() async {
-    var id = await localdbservices.getuserpassword();
-    var response = await http
-        .get(Uri.parse("http://18.210.113.69:1809/api/getParties/$id"));
-    if (response.statusCode == 200) {
-      var mydata = jsonDecode(response.body);
-      // MyParties myParties = MyParties.fromJson(mydata);
-      // for (var temp in myParties.allParties) {
-      //   AllParties allParties =
-      //       AllParties(latitute: temp.latitute, logitute: temp.logitute);
-      //   print(temp.logitute);
-
-      // marker[MarkerId("party${temp.partyID}")] = Marker(
-      //     markerId: MarkerId("party${temp.partyID}"),
-      //     position: LatLng(
-      //         double.parse(temp.latitute), double.parse(temp.logitute)),
-      //     icon: BitmapDescriptor
-      //         .defaultMarker /*BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(40,40)),"assets/Icons/mapicon.png)"*/);
-      // allmyparties.add(allParties);
-    }
-    return allmyparties;
-  }
+  final controller = Get.find<PartyController>();
+  final Completer<GoogleMapController> _controller = Completer();
 
   // Future future;
   @override
@@ -79,30 +60,16 @@ class _AuctionViewState extends State<AuctionView> {
       ),
       body: Stack(
         children: [
-          FutureBuilder(
-              //future: future,
-              builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GoogleMap(
-                minMaxZoomPreference:
-                    MinMaxZoomPreference(_upperValue, _upperValue),
-                initialCameraPosition: CameraPosition(
-                    target: LatLng(30.53996480119752, 70.26455917547194),
-                    zoom: _upperValue),
-                mapType: MapType.terrain,
-                /* scrollGesturesEnabled: true,
-                  rotateGesturesEnabled: true,
-                  zoomGesturesEnabled: true,*/
-                zoomControlsEnabled: false,
-                zoomGesturesEnabled: true,
-                markers: Set.from(marker.values),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(controller.lat!, controller.long!),
+              zoom: 15,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Stack(

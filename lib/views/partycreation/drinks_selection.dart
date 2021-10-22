@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/controllers/party_controller.dart';
+import 'package:party_portal/models/partymodel.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class DrinkSelection extends StatefulWidget {
@@ -20,6 +21,16 @@ class _DrinkSelectionState extends State<DrinkSelection> {
   bool medium = false;
   bool large = false;
   String? size;
+  List<String> list2 = ['Absinthe', 'Advocaat', 'Amaretto', 'Applejack'];
+  List<String> list3 = [
+    'Apples to Apples',
+    'Around the World',
+    'Asshole',
+    'Avalanche',
+    'Bar-Hopping'
+  ];
+  String? gameslist = 'Apples to Apples';
+  String? drinkslist = 'Absinthe';
 
   @override
   void initState() {
@@ -55,20 +66,39 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  width: 200,
-                  child: TextField(
-                    controller: drinks,
-                    decoration: InputDecoration(
-                      label: Text("Enter a Drink name and Press Add"),
-                    ),
-                  ),
-                ),
+                    width: 200,
+                    child: DropdownButton<String>(
+                      value: drinkslist,
+                      items: list2.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value2) {
+                        setState(() {
+                          drinkslist = value2;
+                        });
+                      },
+                    )),
                 ElevatedButton(
                   child: Text("Add"),
                   onPressed: () {
-                    list.add(drinks.text);
-                    drinks.clear();
+                    setState(() {
+                      drinkslist = list2[0];
+                    });
+                    list.add(drinkslist!);
+
+                    Location location = Location();
+                    location.latitude = controller.lat;
+                    location.longitude = controller.long;
+                    location.locationName = "Testing";
+                    controller.party.location = location;
+                    controller.party.createdBy = "1";
+
                     controller.party.drinks = list;
+                    Get.snackbar("Drink Added",
+                        "Your drink has been added Select more drinks and Add them!");
                   },
                 ),
                 Text(
@@ -85,20 +115,31 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  width: 200,
-                  child: TextField(
-                    controller: games,
-                    decoration: InputDecoration(
-                      label: Text("Enter a Game name and Press Add"),
-                    ),
-                  ),
-                ),
+                    width: 200,
+                    child: DropdownButton<String>(
+                      value: gameslist,
+                      items: list3.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value2) {
+                        setState(() {
+                          gameslist = value2;
+                        });
+                      },
+                    )),
                 ElevatedButton(
                   child: Text("Add"),
                   onPressed: () {
-                    gamelist.add(games.text);
-                    games.clear();
+                    setState(() {
+                      gameslist = list3[0];
+                    });
+                    gamelist.add(gameslist!);
                     controller.party.games = gamelist;
+                    Get.snackbar("Game Added",
+                        "Your game has been added please select another games and add them.");
                   },
                 ),
                 SizedBox(
@@ -276,6 +317,9 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                 InkWell(
                   onTap: () {
                     navigationController.getOffAll(home);
+                    controller.party.createdBy = "TestUser";
+                    controller.party.partyInfo = "Awesome Party";
+                    controller.postParty();
                     Get.snackbar(
                       "Party Created",
                       "Your party has been created Successfully!",

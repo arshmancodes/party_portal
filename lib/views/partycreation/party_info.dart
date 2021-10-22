@@ -47,7 +47,8 @@ class _PartyInfoState extends State<PartyInfo> {
                 time = value;
                 formated = DateFormat("yMd").format(time);
                 when = formated.toString();
-                controller.party.startingDate = when;
+                controller.party.startingDate = time.toIso8601String();
+                controller.party.endingDate = time.toIso8601String();
               });
             },
           ),
@@ -77,6 +78,8 @@ class _PartyInfoState extends State<PartyInfo> {
                 timeformated = thistime.toString();
                 HLong = timeformated.toString();
                 controller.party.howLong = HLong;
+                controller.party.location?.latitude = controller.lat;
+                controller.party.location?.longitude = controller.long;
               });
             },
           ),
@@ -215,7 +218,8 @@ class _PartyInfoState extends State<PartyInfo> {
                                   fontFamily: 'SFUIDisplay'),
                               decoration: InputDecoration(
                                 enabled: false,
-                                hintText: "Your Current location will be used",
+                                hintText:
+                                    " Longitude: ${controller.long}, Latitude: ${controller.lat}",
                                 hintStyle: GoogleFonts.openSans(
                                     //fontFamily: "Open Sans",
                                     fontWeight: FontWeight.w400,
@@ -297,43 +301,7 @@ class _PartyInfoState extends State<PartyInfo> {
                   child: Center(
                     child: InkWell(
                       onTap: () {
-                        // where.text = "30.53996480119752 70.26455917547194";
-                        // String location = where.text;
-                        // print(location);
-                        // var lat, lng;
-                        // var mylocation = location.split(" ");
-                        // print(mylocation[0]);
-                        // lat = double.parse(mylocation[0]);
-                        // lng = double.parse(mylocation[1]);
-                        // print(lat);
-                        // if (size1!.isNotEmpty == true &&
-                        //     when!.isNotEmpty &&
-                        //     lat != null &&
-                        //     lng != null &&
-                        //     HLong!.isNotEmpty) {
                         navigationController.navigateTo(drinkSelection);
-                        // Get.to(GameSelected() , arguments: [one , size1, when.toString() , lat.toString(),lng.toString() , HLong.toString()]);
-                        // } else {
-                        //   final snackBar = SnackBar(
-                        //     backgroundColor: Colors.red,
-                        //     content: Row(
-                        //       children: [
-                        //         SizedBox(
-                        //           width: 21,
-                        //         ),
-                        //         Icon(
-                        //           Icons.warning_amber_outlined,
-                        //           color: Colors.white,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 55,
-                        //         ),
-                        //         Text('Text Field are EmPty'),
-                        //       ],
-                        //     ),
-                        //   );
-                        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        //}
                       },
                       child: Container(
                         height: 70,

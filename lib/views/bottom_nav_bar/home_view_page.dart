@@ -36,30 +36,29 @@ class _HomeViewPageState extends State<HomeViewPage> {
   var location = new Location();
   late double lat;
   late double long;
-  fetchparties() async {
-    var id = await localdbservices.getuserpassword();
-    var response =
-        await get(Uri.parse("http://18.210.113.69:1809/api/getParties/$id"));
-    if (response.statusCode == 200) {
-      var mydata = jsonDecode(response.body);
-      // MyParties myParties = MyParties.fromJson(mydata);
-      // for (var temp in myParties.allParties) {
-      //   AllParties allParties =
-      //       AllParties(latitute: temp.latitute, logitute: temp.logitute);
-      //   print(temp.logitute);
+  // fetchparties() async {
+  //   var id = await localdbservices.getuserpassword();
+  //   var response =
+  //       await get(Uri.parse("http://18.210.113.69:1809/api/getParties/$id"));
+  //   if (response.statusCode == 200) {
+  //     var mydata = jsonDecode(response.body);
+  //     // MyParties myParties = MyParties.fromJson(mydata);
+  //     // for (var temp in myParties.allParties) {
+  //     //   AllParties allParties =
+  //     //       AllParties(latitute: temp.latitute, logitute: temp.logitute);
+  //     //   print(temp.logitute);
 
-      // marker[MarkerId("party${temp.partyID}")] = Marker(
-      //     markerId: MarkerId("party${temp.partyID}"),
-      //     position: LatLng(
-      //         double.parse(temp.latitute), double.parse(temp.logitute)),
-      //     icon: BitmapDescriptor
-      //         .defaultMarker /*BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(40,40)),"assets/Icons/mapicon.png)"*/);
-      // allmyparties.add(allParties);
-    }
-    return allmyparties;
-  }
+  //     // marker[MarkerId("party${temp.partyID}")] = Marker(
+  //     //     markerId: MarkerId("party${temp.partyID}"),
+  //     //     position: LatLng(
+  //     //         double.parse(temp.latitute), double.parse(temp.logitute)),
+  //     //     icon: BitmapDescriptor
+  //     //         .defaultMarker /*BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(40,40)),"assets/Icons/mapicon.png)"*/);
+  //     // allmyparties.add(allParties);
+  //   }
+  //   return allmyparties;
+  // }
 
-  List<Marker> allmarkers = <Marker>[].obs;
   BitmapDescriptor? pinLocationIcon;
   final Completer<GoogleMapController> _controller = Completer();
   bool loaded = false;
@@ -94,29 +93,10 @@ class _HomeViewPageState extends State<HomeViewPage> {
     long = currentlocation!.longitude!;
     print(lat);
     print(long);
+    controller.lat = lat;
+    controller.long = long;
     loaded = true;
 
-    allmarkers.add(
-      Marker(
-        markerId: MarkerId('myMarker'),
-        draggable: false,
-        onTap: () {
-          navigationController.navigateTo(joinParty);
-        },
-        position: LatLng(lat, long),
-      ),
-    );
-    allmarkers.add(
-      Marker(
-        markerId: MarkerId('myMarker'),
-        draggable: false,
-        onTap: () {
-          navigationController.navigateTo(joinParty);
-        },
-        position: LatLng(lat + 0.009, long),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-      ),
-    );
     setState(() {});
   }
 
@@ -124,8 +104,11 @@ class _HomeViewPageState extends State<HomeViewPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.gps_fixed), onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.refresh),
+          onPressed: () {
+            setState(() {});
+          }),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -147,7 +130,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
         children: [
           (loaded)
               ? GoogleMap(
-                  markers: Set.from(allmarkers),
+                  markers: Set.from(controller.allmarkers),
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(lat, long),
