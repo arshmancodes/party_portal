@@ -104,6 +104,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
           onPressed: () {
@@ -111,7 +112,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
           }),
       appBar: AppBar(
         elevation: 0,
-        toolbarHeight: 80,
+        toolbarHeight: 60,
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Padding(
@@ -145,152 +146,153 @@ class _HomeViewPageState extends State<HomeViewPage> {
             padding: const EdgeInsets.only(top: 10),
             child: Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 120),
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          check1 = true;
-                          check2 = false;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 125,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            topLeft: Radius.circular(30),
-                          ),
-                          color:
-                              check1 == true ? Color(0xff34C3F8) : Colors.white,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/Icons/female.png",
-                              color:
-                                  check1 == true ? Colors.white : Colors.black,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              "Female",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: size.width * 0.040,
-                                color: check1 == true
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 100),
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          check1 = false;
-                          check2 = true;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color:
-                              check2 == true ? Color(0xff34C3F8) : Colors.white,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/Icons/male.png",
-                              color:
-                                  check2 == true ? Colors.white : Colors.black,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              "Male",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: size.width * 0.040,
-                                color: check2 == true
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(right: 120),
+                //   child: Container(
+                //     alignment: Alignment.topCenter,
+                //     child: GestureDetector(
+                //       onTap: () {
+                //         setState(() {
+                //           check1 = true;
+                //           check2 = false;
+                //         });
+                //       },
+                //       child: Container(
+                //         height: 40,
+                //         width: 125,
+                //         decoration: BoxDecoration(
+                //           borderRadius: const BorderRadius.only(
+                //             bottomLeft: Radius.circular(30),
+                //             topLeft: Radius.circular(30),
+                //           ),
+                //           color:
+                //               check1 == true ? Color(0xff34C3F8) : Colors.white,
+                //         ),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset(
+                //               "assets/Icons/female.png",
+                //               color:
+                //                   check1 == true ? Colors.white : Colors.black,
+                //             ),
+                //             const SizedBox(
+                //               width: 8,
+                //             ),
+                //             Text(
+                //               "Female",
+                //               style: GoogleFonts.poppins(
+                //                 fontWeight: FontWeight.w600,
+                //                 fontSize: size.width * 0.040,
+                //                 color: check1 == true
+                //                     ? Colors.white
+                //                     : Colors.black,
+                //               ),
+                //             )
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 100),
+                //   child: Container(
+                //     alignment: Alignment.topCenter,
+                //     child: GestureDetector(
+                //       onTap: () {
+                //         setState(() {
+                //           check1 = false;
+                //           check2 = true;
+                //         });
+                //       },
+                //       child: Container(
+                //         height: 40,
+                //         width: 120,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(50),
+                //           color:
+                //               check2 == true ? Color(0xff34C3F8) : Colors.white,
+                //         ),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset(
+                //               "assets/Icons/male.png",
+                //               color:
+                //                   check2 == true ? Colors.white : Colors.black,
+                //             ),
+                //             SizedBox(
+                //               width: 8,
+                //             ),
+                //             Text(
+                //               "Male",
+                //               style: GoogleFonts.poppins(
+                //                 fontWeight: FontWeight.w600,
+                //                 fontSize: size.width * 0.040,
+                //                 color: check2 == true
+                //                     ? Colors.white
+                //                     : Colors.black,
+                //               ),
+                //             )
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 120, left: 10),
-            child: Text(
-              "1.00Mile",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w600,
-                fontSize: size.width * 0.035,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 150, left: 10),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                height: 300,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.white,
-                ),
-                child: RotatedBox(
-                    quarterTurns: 3,
-                    child: Slider(
-                      value: _upperValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _upperValue = value;
-                        });
-                      },
-                      max: 18.0,
-                      min: 10,
-                    ))),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, bottom: 80),
-            child: Container(
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                "0.0Miles",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  fontSize: size.width * 0.035,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 120, left: 10),
+          //   child: Text(
+          //     "1.00Mile",
+          //     style: GoogleFonts.poppins(
+          //       fontWeight: FontWeight.w600,
+          //       fontSize: size.width * 0.035,
+          //       color: Colors.black,
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: EdgeInsets.only(top: 150, left: 10),
+          //   child: Container(
+          //       alignment: Alignment.centerLeft,
+          //       height: 300,
+          //       width: 50,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(100),
+          //         color: Colors.white,
+          //       ),
+          //       child: RotatedBox(
+          //           quarterTurns: 3,
+          //           child: Slider(
+          //             value: _upperValue,
+          //             onChanged: (value) {
+          //               setState(() {
+
+          //                 _upperValue = value;
+          //               });
+          //             },
+          //             max: 18.0,
+          //             min: 10,
+          //           ))),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10, bottom: 80),
+          //   child: Container(
+          //     alignment: Alignment.bottomLeft,
+          //     child: Text(
+          //       "0.0Miles",
+          //       style: GoogleFonts.poppins(
+          //         fontWeight: FontWeight.w600,
+          //         fontSize: size.width * 0.035,
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

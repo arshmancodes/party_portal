@@ -37,7 +37,9 @@ class PartyController extends GetxController {
         Uri.parse('http://partyportal-16261.nodechef.com/api/party/create');
 
     try {
-      var response = await http.post(url, body: jsonEncode(json));
+      var response = await http.post(url,
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          body: jsonEncode(json));
       print(response.body);
     } on Exception catch (e) {
       print(e);

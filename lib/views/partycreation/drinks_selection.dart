@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/authentication/auth_controller.dart';
 import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/models/partymodel.dart';
 import 'package:party_portal/router/route_generator.dart';
@@ -15,6 +16,7 @@ class DrinkSelection extends StatefulWidget {
 
 class _DrinkSelectionState extends State<DrinkSelection> {
   final controller = Get.find<PartyController>();
+  final authcontroller = Get.find<AuthController>();
   TextEditingController drinks = TextEditingController();
   TextEditingController games = TextEditingController();
   bool small = true;
@@ -43,10 +45,6 @@ class _DrinkSelectionState extends State<DrinkSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
@@ -144,13 +142,6 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                 ),
                 SizedBox(
                   height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Select",
-                    style: TextStyle(color: Colors.black),
-                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -317,7 +308,8 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                 InkWell(
                   onTap: () {
                     navigationController.getOffAll(home);
-                    controller.party.createdBy = "TestUser";
+                    controller.party.createdBy =
+                        authcontroller.currentUser.value.mongodbId;
                     controller.party.partyInfo = "Awesome Party";
                     controller.postParty();
                     Get.snackbar(

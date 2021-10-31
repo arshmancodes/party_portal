@@ -13,6 +13,7 @@ import 'package:party_portal/views/partycreation/party_info.dart';
 import 'package:party_portal/views/partycreation/party_detail.dart';
 import 'package:party_portal/views/partycreation/party_size.dart';
 import 'package:party_portal/views/partycreation/portal_pricing.dart';
+import 'package:party_portal/views/profile/edit_profile.dart';
 import 'package:party_portal/views/profile/profile_notification.dart';
 import 'package:party_portal/views/splash/splash_screen.dart';
 import 'package:party_portal/views/winningPages/arrive.dart';
@@ -40,6 +41,7 @@ const String guestIntro = '/guesIntro';
 const String arrivePage = '/arrivePage';
 const String notificationScreen = '/notificationScreen';
 const String buildHistory = '/buildHistory';
+const String editProfile = '/editProfile';
 
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
@@ -88,6 +90,8 @@ class RouteGenerator {
       case signOut:
         authController.logOutUser();
         return _getPageRoute(SignupPage());
+      case editProfile:
+        return _getPageRoute(EditProfile());
       default:
         return _errorRoute();
     }

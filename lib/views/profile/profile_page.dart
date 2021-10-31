@@ -48,13 +48,13 @@ class _ProfileState extends State<ProfilePage> {
                 ),
                 Center(
                   child: Obx(() => Text(
-                    '${authController.currentUser.value.name}',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: size.width * 0.05,
-                      color: Colors.black,
-                    ),
-                  )),
+                        '${authController.currentUser.value.name}',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          fontSize: size.width * 0.05,
+                          color: Colors.black,
+                        ),
+                      )),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -90,8 +90,7 @@ class _ProfileState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.snackbar("Profile Settings",
-                        "Profile settings are under development and will be available to you soon.");
+                    navigationController.navigateTo(editProfile);
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(left: 20),
