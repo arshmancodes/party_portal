@@ -67,6 +67,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
   void initState() {
     getLocation();
     controller.getParties();
+
     print("Location print ${currentlocation}");
     super.initState();
     // future = fetchparties();
