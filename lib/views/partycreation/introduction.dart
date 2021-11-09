@@ -56,7 +56,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    chooseImage();
+                    openCamera();
+                    //chooseImage();
                   },
                   child: Card(
                     elevation: 20,
@@ -65,7 +66,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: SizedBox(
-                      width: 100,
+                      width: 150,
                       height: 58,
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -77,7 +78,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Upload',
+                                  'Take a Picture',
                                   style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     color: Colors.white,
@@ -128,6 +129,13 @@ class _IntroductionPageState extends State<IntroductionPage> {
     );
   }
 
+  openCamera() async {
+    var imagepicker = ImagePicker();
+    var file = await imagepicker.pickImage(source: ImageSource.camera);
+    filelocation = file!.path;
+    setState(() {});
+  }
+
   chooseImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     File files;
@@ -140,33 +148,4 @@ class _IntroductionPageState extends State<IntroductionPage> {
       // User canceled the picker
     }
   }
-// Widget showImage() {
-//     return FutureBuilder<XFile>(
-//       future: file,
-//       builder: (BuildContext context, AsyncSnapshot<XFile> snapshot) {
-//         if (snapshot.connectionState == ConnectionState.done &&
-//             null != snapshot.data) {
-//           tmpFile = snapshot.data;
-//           base64Image = base64Encode(snapshot.data?.);
-//           return Flexible(
-//             child: Image.file(
-//               snapshot.data,
-//               fit: BoxFit.fill,
-//             ),
-//           );
-//         } else if (null != snapshot.error) {
-//           return const Text(
-//             'Error Picking Image',
-//             textAlign: TextAlign.center,
-//           );
-//         } else {
-//           return const Text(
-//             'No Image Selected',
-//             textAlign: TextAlign.center,
-//           );
-//         }
-//       },
-//     );
-//   }
-
 }

@@ -37,7 +37,7 @@ class PartyModel {
     partyInfo = json['partyInfo'];
     startingDate = json['startingDate'];
     endingDate = json['endingDate'];
-    location = new Location.fromJson(json['location']);
+    location = Location.fromJson(json['location']);
     drinks = json['drinks'].cast<String>();
     games = json['games'].cast<String>();
     partyRating = json['partyRating'];
