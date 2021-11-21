@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -12,11 +13,13 @@ class PartyController extends GetxController {
   var partylist = <PartyModel>[].obs;
   var markerslist = <Location>[].obs;
   List<Marker> allmarkers = <Marker>[].obs;
+  final partyDetail = PartyModel();
   final party = PartyModel();
   final usercreated = <PartyModel>[].obs;
   final usercreated2 = <PartyModel>[].obs;
   double? lat;
   double? long;
+  BitmapDescriptor? icon;
 
   void getParties() async {
     Uri url = Uri.parse('http://partyportal-16261.nodechef.com/api/party/all');
@@ -29,6 +32,9 @@ class PartyController extends GetxController {
       partylist.value = list.map((e) => PartyModel.fromJson(e)).toList();
       markerslist.value =
           list.map((e) => Location.fromJson(e['location'])).toList();
+      icon = await BitmapDescriptor.fromAssetImage(
+          ImageConfiguration(size: Size(16, 16)),
+          'assets/images/blue_logo.png');
       getMarkers();
     } on Exception catch (e) {
       print(e);
@@ -76,11 +82,12 @@ class PartyController extends GetxController {
   void getMarkers() {
     for (int i = 0; i < markerslist.length; i++) {
       Marker marker = Marker(
+          icon: icon!,
           markerId: MarkerId(markerslist[i].locationName!),
           draggable: false,
           position: LatLng(markerslist[i].latitude!, markerslist[i].longitude!),
           onTap: () {
-            navigationController.navigateTo('/auctionView');
+            navigationController.navigateTo('/eventDetail');
           });
       allmarkers.add(marker);
     }

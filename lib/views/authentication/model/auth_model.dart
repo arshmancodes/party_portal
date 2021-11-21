@@ -1,5 +1,4 @@
 class AuthModel {
-
   String? mongodbId;
   String? name;
   String? email;
@@ -10,18 +9,17 @@ class AuthModel {
   // List<Address>? address;
   // PaymentCard? paymentCard;
 
-  AuthModel(
-      {
-        this.mongodbId,
-        this.name,
-        this.email,
-        this.phoneNumber,
-        this.imageUrl,
-        this.fcmToken,
-        this.age,
-        // this.address,
-        // this.paymentCard
-      });
+  AuthModel({
+    this.mongodbId,
+    this.name,
+    this.email,
+    this.phoneNumber,
+    this.imageUrl,
+    this.fcmToken,
+    this.age,
+    // this.address,
+    // this.paymentCard
+  });
 
   AuthModel.fromJson(Map<String, dynamic> json) {
     mongodbId = json['_id'];

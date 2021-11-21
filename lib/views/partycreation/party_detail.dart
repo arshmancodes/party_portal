@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/router/route_generator.dart';
 
@@ -463,6 +464,46 @@ class _EventDetailState extends State<EventDetail> {
                   ],
                 ),
               ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Center(
+              child: Text("Join Party"),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("Enter the amount to Bid"),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                              decoration: InputDecoration(
+                            label: Text("Amount"),
+                          )),
+                          ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Get.snackbar("Bid Placed",
+                                    "Your bid has been successfully placed",
+                                    backgroundColor: Colors.green);
+                              },
+                              child: Text("Bid"))
+                        ],
+                      ),
+                    );
+                  });
+            },
+            child: Center(
+              child: Text("Bid on This Party"),
             ),
           ),
           // Padding(
