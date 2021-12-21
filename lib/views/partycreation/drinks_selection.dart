@@ -29,7 +29,29 @@ class _DrinkSelectionState extends State<DrinkSelection> {
     'Around the World',
     'Asshole',
     'Avalanche',
-    'Bar-Hopping'
+    'Bar-Hopping',
+    'Bartok(Card Game)',
+    'Baseball',
+    'Beer Bong',
+    'Beer can Pyramid',
+    'Beer Checkers',
+    'Beer Die',
+    'Beer Helmet',
+    'Beer Mile',
+    'Beer Pong',
+    'Beer Darts',
+    'Biscuit',
+    'Black or Red',
+    'Boat Race',
+    'Boot of Beer',
+    'Buffalo',
+    'DropShot Blitz',
+    'DropShot Bonanza',
+    'Cards Against Humanity',
+    'Detonator',
+    'Dizzy Bat',
+    'Edward FortyHands',
+    'Fingers'
   ];
   String? gameslist = 'Apples to Apples';
   String? drinkslist = 'Absinthe';

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:party_portal/constants/controllers.dart';
+import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
 
 class EventDetail extends StatefulWidget {
@@ -12,6 +13,8 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
+
+  final controller = Get.find<PartyController>();
   Widget image_carousel = Container(
     // decoration: BoxDecoration(
     //   borderRadius: BorderRadius.circular(10.0)
@@ -41,15 +44,15 @@ class _EventDetailState extends State<EventDetail> {
         elevation: 0,
         toolbarHeight: 80,
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/Welcome');
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(
+        //     Icons.arrow_back_ios_sharp,
+        //     color: Colors.black,
+        //   ),
+        //   onPressed: () {
+        //     Navigator.of(context).pushReplacementNamed('/Welcome');
+        //   },
+        // ),
         // title:Image.asset('assets/img/Create.png', width: 60, height: 60,) ,
       ),
       body: ListView(
@@ -257,7 +260,7 @@ class _EventDetailState extends State<EventDetail> {
           Padding(
             padding: EdgeInsets.only(left: 20, top: 10),
             child: Text(
-              'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a',
+              controller.partyDetail.partyInfo!,
               style: TextStyle(fontSize: 10, color: Colors.black54),
             ),
           ),
@@ -291,7 +294,7 @@ class _EventDetailState extends State<EventDetail> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      '11:45:00 PM',
+                      controller.partyDetail.startingDate!,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -332,7 +335,7 @@ class _EventDetailState extends State<EventDetail> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      'America',
+                      controller.partyDetail.location!.locationName!,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -343,47 +346,47 @@ class _EventDetailState extends State<EventDetail> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), //color of shadow
-                    spreadRadius: 2, //spread radius
-                    blurRadius: 2, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'States',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      'wasigton',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+          //   child: Container(
+          //     height: 50,
+          //     decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: Colors.grey.withOpacity(0.2), //color of shadow
+          //           spreadRadius: 2, //spread radius
+          //           blurRadius: 2, // blur radius
+          //           offset: Offset(0, 2), // changes position of shadow
+          //           //first paramerter of offset is left-right
+          //           //second parameter is top to down
+          //         ),
+          //         //you can set more BoxShadow() here
+          //       ],
+          //       borderRadius: BorderRadius.circular(20),
+          //     ),
+          //     child: Padding(
+          //       padding: EdgeInsets.only(left: 10, right: 10),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           Text(
+          //             'States',
+          //             style:
+          //                 TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          //           ),
+          //           Text(
+          //             'wasigton',
+          //             style: TextStyle(
+          //                 fontSize: 15,
+          //                 fontWeight: FontWeight.w600,
+          //                 color: Colors.black54),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Container(
@@ -414,7 +417,7 @@ class _EventDetailState extends State<EventDetail> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      'All',
+                      controller.partyDetail.drinks!.join(),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -450,12 +453,53 @@ class _EventDetailState extends State<EventDetail> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Members',
+                      'Host Count',
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      '54',
+                      controller.partyDetail.hostCount.toString(),
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2), //color of shadow
+                    spreadRadius: 2, //spread radius
+                    blurRadius: 2, // blur radius
+                    offset: Offset(0, 2), // changes position of shadow
+                    //first paramerter of offset is left-right
+                    //second parameter is top to down
+                  ),
+                  //you can set more BoxShadow() here
+                ],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Guest Count',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      controller.partyDetail.guestCount.toString(),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,

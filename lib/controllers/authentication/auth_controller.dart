@@ -21,7 +21,10 @@ class AuthController extends GetxController {
     try {
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
+        print(currentUser);
+        
         currentUser.value = AuthModel.fromJson(jsonDecode(response.body)['result']);
+        
       }
     } catch (e) {
       debugPrint(e.toString());

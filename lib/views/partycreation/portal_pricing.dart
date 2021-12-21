@@ -269,7 +269,7 @@ class _PortalPricingState extends State<PortalPricing> {
           ),
           InkWell(
             onTap: () {
-              navigationController.navigateTo(home);
+              navigationController.navigateTo('/eventDetail');
               Get.snackbar("Party Saved", "You have Saved this Party",
                   backgroundColor: Colors.green);
             },
@@ -279,7 +279,7 @@ class _PortalPricingState extends State<PortalPricing> {
                   textConfirm: "Pay Now",
                   title: "Auction Amount",
                   onConfirm: () {
-                    navigationController.getOffAll(home);
+                    navigationController.navigateTo('/eventDetail');
                     Get.snackbar("Payment Successful",
                         'You have Successfully purchased the access',
                         backgroundColor: Colors.green[300]);
@@ -316,7 +316,7 @@ class _PortalPricingState extends State<PortalPricing> {
           ),
           InkWell(
             onTap: () {
-              navigationController.navigateTo(home);
+              navigationController.navigateTo('/eventDetail');
               Get.snackbar("Party Saved", "You have Saved this Party",
                   backgroundColor: Colors.green);
             },
@@ -326,7 +326,7 @@ class _PortalPricingState extends State<PortalPricing> {
                   textConfirm: "Pay Now",
                   title: "Auction Amount",
                   onConfirm: () {
-                    navigationController.getOffAll(home);
+                    navigationController.navigateTo('/eventDetail');
                     Get.snackbar("Payment Successful",
                         'You have Successfully purchased the access',
                         backgroundColor: Colors.green[300]);

@@ -21,6 +21,7 @@ class _LogInState extends State<LoginPage> {
   String? _userEmail, _userPassword;
 
   void _trySubmit() {
+    print("Button pressed");
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 

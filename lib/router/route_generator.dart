@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/views/authentication/auth_decider.dart';
+import 'package:party_portal/views/bottom_nav_bar/admin_party.dart';
 import 'package:party_portal/views/bottom_nav_bar/auction_view.dart';
 import 'package:party_portal/views/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:party_portal/views/authentication/login_page.dart';
@@ -44,7 +45,7 @@ const String notificationScreen = '/notificationScreen';
 const String buildHistory = '/buildHistory';
 const String editProfile = '/editProfile';
 const String mapSelect = '/mapSelect';
-
+const String adminParty = '/adminParty';
 // TODO : ROUTES GENERATOR CLASS THAT CONTROLS THE FLOW OF NAVIGATION/ROUTING
 
 class RouteGenerator {
@@ -96,6 +97,8 @@ class RouteGenerator {
         return _getPageRoute(EditProfile());
       case mapSelect:
         return _getPageRoute(MapSelect());
+      case adminParty:
+        return _getPageRoute(AdminParty());
       default:
         return _errorRoute();
     }

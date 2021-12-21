@@ -10,10 +10,11 @@ import 'package:party_portal/models/partymodel.dart';
 import 'package:party_portal/views/authentication/model/auth_model.dart';
 
 class PartyController extends GetxController {
+  var auth = Get.find<AuthController>();
   var partylist = <PartyModel>[].obs;
   var markerslist = <Location>[].obs;
   List<Marker> allmarkers = <Marker>[].obs;
-  final partyDetail = PartyModel();
+  var partyDetail = PartyModel();
   final party = PartyModel();
   final usercreated = <PartyModel>[].obs;
   final usercreated2 = <PartyModel>[].obs;
@@ -87,7 +88,16 @@ class PartyController extends GetxController {
           draggable: false,
           position: LatLng(markerslist[i].latitude!, markerslist[i].longitude!),
           onTap: () {
-            navigationController.navigateTo('/eventDetail');
+            if(auth.currentUser.value.email == 'arshman11@hotmail.com')
+            {
+              navigationController.navigateTo('/adminParty');
+            }
+            else
+            {
+              navigationController.navigateTo('/partyPricing');
+            }
+            
+            partyDetail = partylist[i];
           });
       allmarkers.add(marker);
     }
