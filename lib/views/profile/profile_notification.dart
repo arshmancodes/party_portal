@@ -1,4 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -16,13 +18,62 @@ class _NotificationScreenState extends State<NotificationScreen> {
         elevation: 0,
         backgroundColor: Colors.lightBlueAccent,
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
         children: [
-          Center(child: Text("You have no New Notifications Currently!")),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              onTap: () {
+                Get.snackbar("Notification", "You have read this notification",
+                    backgroundColor: Colors.green);
+              },
+              leading: Icon(Icons.blender_outlined),
+              title: Text("Party Joined"),
+              subtitle: Text(
+                  "A User has joined your party and will be arriving soon at your destination"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              onTap: () {
+                Get.snackbar("Notification", "You have read this notification",
+                    backgroundColor: Colors.green);
+              },
+              leading: Icon(Icons.blender_outlined),
+              title: Text("Party Joined"),
+              subtitle: Text(
+                  "A User has joined your party and will be arriving soon at your destination"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              onTap: () {
+                Get.snackbar("Notification", "You have read this notification",
+                    backgroundColor: Colors.green);
+              },
+              leading: Icon(Icons.blender_outlined),
+              title: Text("Party Joined"),
+              subtitle: Text(
+                  "A User has joined your party and will be arriving soon at your destination"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              onTap: () {
+                Get.snackbar("Notification", "You have read this notification",
+                    backgroundColor: Colors.green);
+              },
+              leading: Icon(Icons.blender_outlined),
+              title: Text("Party Joined"),
+              subtitle: Text(
+                  "A User has joined your party and will be arriving soon at your destination"),
+            ),
+          ),
         ],
-      )),
+      ),
     );
   }
 }
