@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:get/get.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/controllers/party_controller.dart';
@@ -516,6 +517,8 @@ class _EventDetailState extends State<EventDetail> {
               child: Text("Join Party"),
             ),
           ),
+          SizedBox(height: 20,),
+
           ElevatedButton(
             onPressed: () {
               showDialog(

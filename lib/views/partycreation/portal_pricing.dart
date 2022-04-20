@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:party_portal/constants/controllers.dart';
@@ -68,6 +69,7 @@ class _PortalPricingState extends State<PortalPricing> {
                 ),
                 child: image_carousel),
           ),
+
           Padding(
             padding: EdgeInsets.only(top: 20),
             child: Container(
@@ -314,6 +316,7 @@ class _PortalPricingState extends State<PortalPricing> {
               ),
             ),
           ),
+
           InkWell(
             onTap: () {
               navigationController.navigateTo('/eventDetail');
@@ -356,6 +359,94 @@ class _PortalPricingState extends State<PortalPricing> {
                   height: 50,
                   child: Center(
                     child: Text("Platinum Portal Plan  - 4.99\$/mo"),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              navigationController.navigateTo('/eventDetail');
+              Get.snackbar("Party Saved", "You have Saved this Party",
+                  backgroundColor: Colors.green);
+            },
+            child: InkWell(
+              onTap: () => {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => UsePaypal(
+                              sandboxMode: false,
+                              clientId:
+                              "AabwX5DQfEY_lXWP-iAD0GBTvV37fEeqGAdeEVd7Gye17p0_qpBYJl_Zku9Ykrqh8OzjvPweGRbAqOVC",
+                              secretKey:
+                              "EMZlCAcVUWPfJgqs46IxudYP4BR9r4oyyvrf5wyPXy-RQ5yBzS_yHBZMKkn92ETWRIuzYL9j4nGmQ1Be",
+                              returnURL: "https://samplesite.com/return",
+                              cancelURL: "https://samplesite.com/cancel",
+                              transactions: const [
+                                {
+                                  "amount": {
+                                    "total": '10.12',
+                                    "currency": "USD",
+                                    "details": {
+                                      "subtotal": '10.12',
+                                      "shipping": '0',
+                                      "shipping_discount": 0
+                                    }
+                                  },
+                                  "description":
+                                  "The payment transaction description.",
+                                  // "payment_options": {
+                                  //   "allowed_payment_method":
+                                  //       "INSTANT_FUNDING_SOURCE"
+                                  // },
+                                  "item_list": {
+                                    "items": [
+                                      {
+                                        "name": "A demo product",
+                                        "quantity": 1,
+                                        "price": '10.12',
+                                        "currency": "USD"
+                                      }
+                                    ],
+
+                                    // shipping address is not required though
+                                    "shipping_address": {
+                                      "recipient_name": "Jane Foster",
+                                      "line1": "Travis County",
+                                      "line2": "",
+                                      "city": "Austin",
+                                      "country_code": "US",
+                                      "postal_code": "73301",
+                                      "phone": "+00000000",
+                                      "state": "Texas"
+                                    },
+                                  }
+                                }
+                              ],
+                              note: "Contact us for any questions on your order.",
+                              onSuccess: (Map params) async {
+                                print("onSuccess: $params");
+                              },
+                              onError: (error) {
+                                print("onError: $error");
+                              },
+                              onCancel: (params) {
+                                print('cancelled: $params');
+                              }),
+                        ),
+                      ),
+              },
+              child: Card(
+                elevation: 20,
+                color: Colors.blue[400],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: SizedBox(
+                  width: 100,
+                  height: 50,
+                  child: Center(
+                    child: Text("Payment Check"),
                   ),
                 ),
               ),

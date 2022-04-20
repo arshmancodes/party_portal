@@ -16,6 +16,7 @@ class AuthController extends GetxController {
 
   var currentUser = AuthModel().obs;
 
+
   void getUserById(String id) async {
     var url = Uri.parse('$base_url/auth/all/$id');
     try {
@@ -23,7 +24,7 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         print(currentUser);
         
-        currentUser.value = AuthModel.fromJson(jsonDecode(response.body)['result']);
+        currentUser.value = AuthModel.fromJson(jsonDecode(response.body));
         
       }
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,12 +8,14 @@ import 'package:http/http.dart' as http;
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/controllers/authentication/auth_controller.dart';
 import 'package:party_portal/models/partymodel.dart';
+import 'package:party_portal/notificationservice/local_notification_service.dart';
 import 'package:party_portal/views/authentication/model/auth_model.dart';
 
 class PartyController extends GetxController {
   var auth = Get.find<AuthController>();
   var partylist = <PartyModel>[].obs;
   var markerslist = <Location>[].obs;
+  var notificationslist = <RemoteMessage>[].obs;
   List<Marker> allmarkers = <Marker>[].obs;
   var partyDetail = PartyModel();
   final party = PartyModel();
@@ -65,6 +68,8 @@ class PartyController extends GetxController {
   }
 
   void postParty() async {
+
+
     var json = party.toJson();
     Uri url =
         Uri.parse('http://partyportal-16261.nodechef.com/api/party/create');
@@ -78,6 +83,8 @@ class PartyController extends GetxController {
       print(e);
     }
     print(jsonEncode(json));
+
+
   }
 
   void getMarkers() {

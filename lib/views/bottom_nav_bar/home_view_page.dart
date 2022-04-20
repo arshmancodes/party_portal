@@ -27,7 +27,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
   bool check1 = true;
   bool check2 = false;
   Localdbservices localdbservices = Localdbservices();
-  final controller = Get.put(PartyController());
+  final controller = Get.find<PartyController>();
   ImageConfiguration? img;
   GoogleMapController? mapController;
   Map<MarkerId, Marker> marker = <MarkerId, Marker>{};
