@@ -25,6 +25,27 @@ class PartyController extends GetxController {
   double? long;
   BitmapDescriptor? icon;
 
+  void sendPartyNotification() async {
+
+    var notiurl = Uri.parse("https://fcm.googleapis.com/fcm/send");
+
+    try {
+      var response_noti = await http.post(notiurl, headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'key=AAAAmoWXIaQ:APA91bEwk2aTPGusqDiMmXOr3Ka20s3g5FPlKt-LMnvwPW356m73ItwuAXlVH0i0WsIGfnAIHhMjQMYp4IYXCzMZoq1Ig8dKvmiLO3ckTDf1lXfjHdkreDOVked8zDN95dbyX2etyalI'
+      }, body: jsonEncode({
+        'registration_ids': auth.tokens,
+        'notification': {
+          'title': 'Party Created',
+          'body': 'A new party has been Created',
+          'android_channel_id': 'partyportals',
+        }
+      }));
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+  }
+
   void getParties() async {
     Uri url = Uri.parse('http://partyportal-16261.nodechef.com/api/party/all');
 
@@ -40,9 +61,12 @@ class PartyController extends GetxController {
           ImageConfiguration(size: Size(16, 16)),
           'assets/images/blue_logo.png');
       getMarkers();
+
+
     } on Exception catch (e) {
       print(e);
     }
+
   }
 
   Future<void> getPartybyId(String userid) async {

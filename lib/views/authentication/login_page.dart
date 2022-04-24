@@ -32,6 +32,7 @@ class _LogInState extends State<LoginPage> {
         if(response.statusCode == 200){
           navigationController.getOffAll(mainRootPage);
           CustomSnackBar.showSnackBar(title: 'Login Successful', message: '', backgroundColor: snackBarSuccess);
+          authController.getAllUsers();
         }else{
           String message = jsonDecode(response.body)['error'];
           CustomSnackBar.showSnackBar(title: message, message: '', backgroundColor: snackBarError);

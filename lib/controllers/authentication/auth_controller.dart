@@ -15,6 +15,8 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
   var currentUser = AuthModel().obs;
+  List<String> tokens = [];
+
 
 
   void getUserById(String id) async {
@@ -23,9 +25,24 @@ class AuthController extends GetxController {
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         print(currentUser);
-        
         currentUser.value = AuthModel.fromJson(jsonDecode(response.body));
-        
+        getAllUsers();
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  void getAllUsers() async {
+    var url = Uri.parse('$base_url/auth/all');
+    try {
+      http.Response response = await http.get(url);
+      if (response.statusCode == 200) {
+        Iterable list = jsonDecode(response.body)['results'];
+        list.forEach((element) {
+          tokens.add(element['fcmToken']);
+        });
+        print(tokens.length);
       }
     } catch (e) {
       debugPrint(e.toString());
