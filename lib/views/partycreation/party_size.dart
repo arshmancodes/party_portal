@@ -42,13 +42,6 @@ class _PartySizeState extends State<PartySize> {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: ()
-                    {
-                      controller.sendPartyNotification();
-                    },
-                    child: Text("Send Noti"),
-                  ),
                   Text(
                     "Party Size",
                     style: GoogleFonts.poppins(

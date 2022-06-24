@@ -1,4 +1,5 @@
 class PartyModel {
+  String? id;
   String? createdBy;
   String? partySize;
   int? hostCount;
@@ -14,7 +15,8 @@ class PartyModel {
   String? howLong;
 
   PartyModel(
-      {this.createdBy,
+      {this.id,
+        this.createdBy,
       this.partySize,
       this.hostCount,
       this.guestCount,
@@ -29,6 +31,7 @@ class PartyModel {
       this.howLong});
 
   PartyModel.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
     createdBy = json['createdBy'];
     partySize = json['partySize'];
     hostCount = json['hostCount'];

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class PartyController extends GetxController {
   List<Marker> allmarkers = <Marker>[].obs;
   var partyDetail = PartyModel();
   final party = PartyModel();
+  var view_party = PartyModel();
   final usercreated = <PartyModel>[].obs;
   final usercreated2 = <PartyModel>[].obs;
   double? lat;
@@ -59,13 +61,26 @@ class PartyController extends GetxController {
           list.map((e) => Location.fromJson(e['location'])).toList();
       icon = await BitmapDescriptor.fromAssetImage(
           ImageConfiguration(size: Size(16, 16)),
-          'assets/images/blue_logo.png');
+          'assets/images/Create.png');
       getMarkers();
-
 
     } on Exception catch (e) {
       print(e);
     }
+
+  }
+  
+  void deleteParty(String id) async {
+  Uri url = Uri.parse("http://partyportal-16261.nodechef.com/api/party/delete/$id");
+
+  try{
+    var response = await http.post(url, headers: {'Content-Type': 'application/json; charset=UTF-8'});
+    print(response.body);
+
+    }
+  on Exception catch (e){
+
+  }
 
   }
 

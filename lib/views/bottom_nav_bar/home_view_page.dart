@@ -65,11 +65,11 @@ class _HomeViewPageState extends State<HomeViewPage> {
   // Future future;
   @override
   void initState() {
+    super.initState();
     getLocation();
     controller.getParties();
-
+    setState(() {});
     print("Location print ${currentlocation}");
-    super.initState();
     // future = fetchparties();
   }
 
@@ -142,7 +142,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                     _controller.complete(controller);
                   },
                 )
-              : CircularProgressIndicator(),
+              : Center(child: CircularProgressIndicator()),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Stack(

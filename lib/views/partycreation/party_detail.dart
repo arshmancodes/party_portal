@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
@@ -15,7 +17,10 @@ class EventDetail extends StatefulWidget {
 
 class _EventDetailState extends State<EventDetail> {
 
+
+
   final controller = Get.find<PartyController>();
+
   Widget image_carousel = Container(
     // decoration: BoxDecoration(
     //   borderRadius: BorderRadius.circular(10.0)
@@ -553,6 +558,16 @@ class _EventDetailState extends State<EventDetail> {
               child: Text("Bid on This Party"),
             ),
           ),
+          ElevatedButton(onPressed: () {
+            controller.deleteParty(controller.view_party.id!);
+            controller.usercreated2.forEach((element) {
+              if(element.id == controller.view_party.id!)
+                {
+                  controller.usercreated2.remove(element);
+                }
+            });
+            Navigator.pop(context);
+          }, child: Text("Delete This Party"))
           // Padding(
           //   padding: const EdgeInsets.only(top: 30.0),
           //   child: InkWell(
@@ -593,6 +608,7 @@ class _EventDetailState extends State<EventDetail> {
           //         height: 70,
           //       )),
           // ),
+
         ],
       ),
     );

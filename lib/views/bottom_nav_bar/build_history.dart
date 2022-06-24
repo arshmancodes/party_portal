@@ -52,6 +52,8 @@ class _BuildHistoryState extends State<BuildHistory> {
                       return InkWell(
                         onTap: () {
                           navigationController.navigateTo(eventDetail);
+                          controller.partyDetail = controller.usercreated2[index];
+                          controller.view_party = controller.usercreated2[index];
                         },
                         child: Card(
                           elevation: 20,

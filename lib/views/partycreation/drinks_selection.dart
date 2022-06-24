@@ -439,7 +439,9 @@ class _DrinkSelectionState extends State<DrinkSelection> {
                     controller.party.partyInfo = "Awesome Party";
 
                     controller.postParty();
-
+                    controller.sendPartyNotification();
+                    controller.getParties();
+                    setState(() {});
                     Get.snackbar(
                       "Party Created",
                       "Your party has been created Successfully!",

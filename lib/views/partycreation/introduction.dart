@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io' as Io;
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
   String? base64Image;
   XFile? tmpFile;
   List<String> filelocation = [];
+  List<String> uploadfiles = [];
+
   String errMessage = 'Error Uploading Image';
   final controller = Get.find<PartyController>();
   @override
@@ -106,7 +110,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Image(
-                          image: FileImage(File(filelocation![index])),
+                          image: FileImage(Io.File(filelocation![index])),
                           ),
                             );
       
@@ -149,11 +153,19 @@ class _IntroductionPageState extends State<IntroductionPage> {
 
   chooseImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
-    List<File> files = [];
+    List<Io.File> files = [];
     if (result != null) {
-      files.add(File(result.files.single.path!));
+      files.add(Io.File(result.files.single.path!));
       print(result.files.single.path!);
+      File imagefile = Io.File(result.files.single.path!);
       filelocation.add(result.files.single.path!);
+      //Uint8List imagebytes = await imagefile.readAsBytes();
+      //String base64string = base64.encode(imagebytes);
+      //print(base64string);
+      // print(img64.substring(0, 100));
+      //uploadfiles.add(base64string);
+      //print(controller.party.partyImages);
+
       setState(() {});
     } else {
       // User canceled the picker
