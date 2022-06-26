@@ -1,1 +1,1 @@
-const String base_url = "http://partyportal-16261.nodechef.com/api";
+const String base_url = "http://10.0.2.2:8080/api";
