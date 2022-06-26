@@ -116,6 +116,8 @@ class PartyController extends GetxController {
     print(jsonEncode(json));
   }
 
+  //postparty function
+
   // postIt() async {
   //   var postUri = Uri.parse("$base_url/party/create");
   //   var request = new http.MultipartRequest("POST", postUri);
