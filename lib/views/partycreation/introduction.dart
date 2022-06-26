@@ -79,7 +79,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -103,34 +104,37 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   (filelocation.isNotEmpty)
                       ? Container(
                           height: 200,
-                          
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                          image: FileImage(Io.File(filelocation![index])),
-                          ),
-                            );
-      
-                          }, itemCount: filelocation?.length, ) )
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image(
+                                  image:
+                                      FileImage(Io.File(filelocation![index])),
+                                ),
+                              );
+                            },
+                            itemCount: filelocation?.length,
+                          ))
                       : SizedBox(
                           height: 2,
                         ),
                   SizedBox(
                     height: 40,
                   ),
-                  Text("Swipe left and Right to scroll between images", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18) ),
+                  Text("Swipe left and Right to scroll between images",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   SizedBox(height: 80),
                   InkWell(
                     onTap: () {
                       print("${controller.party.partySize}");
                       print("${controller.party.hostCount}");
                       print(filelocation);
-                      
+
                       controller.party.partyImages = filelocation;
-      
+
                       navigationController.navigateTo(partyInfo);
                     },
                     child: Image.asset('assets/images/createbtn.png'),
