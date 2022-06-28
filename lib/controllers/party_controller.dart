@@ -15,7 +15,7 @@ class PartyController extends GetxController {
   var partylist = <PartyModel>[].obs;
   var markerslist = <Location>[].obs;
   var notificationslist = <RemoteMessage>[].obs;
-  List<Marker> allmarkers = <Marker>[].obs;
+  Set<Marker> allmarkers = Set();
   var partyDetail = PartyModel();
   final party = PartyModel();
   var view_party = PartyModel();
@@ -141,6 +141,7 @@ class PartyController extends GetxController {
           },
         ));
     print(response.data);
+    getParties();
 
     // Uri img_url = Uri.parse('$base_url/party/updateParty');
     // var img_response = await http.post(img_url,
@@ -272,17 +273,18 @@ class PartyController extends GetxController {
     for (int i = 0; i < markerslist.length; i++) {
       Marker marker = Marker(
           icon: icon!,
-          markerId: MarkerId(markerslist[i].locationName!),
+          markerId: MarkerId(partylist[i].id.toString()),
           draggable: false,
           position: LatLng(markerslist[i].latitude!, markerslist[i].longitude!),
           onTap: () {
+            partyDetail = partylist[i];
+            print(partylist[i].hostCount);
             if (auth.currentUser.value.email == 'arshman11@hotmail.com') {
               navigationController.navigateTo('/adminParty');
             } else {
-              navigationController.navigateTo('/partyPricing');
+              navigationController.navigateTo('/eventDetail');
             }
-
-            partyDetail = partylist[i];
+            //partyDetail = partylist[];
           });
       allmarkers.add(marker);
     }

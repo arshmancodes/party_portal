@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:get/get.dart';
+import 'package:party_portal/constants/base_url.dart';
 import 'package:party_portal/constants/controllers.dart';
 import 'package:party_portal/controllers/party_controller.dart';
 import 'package:party_portal/router/route_generator.dart';
@@ -16,9 +17,6 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
-
-
-
   final controller = Get.find<PartyController>();
 
   Widget image_carousel = Container(
@@ -30,11 +28,13 @@ class _EventDetailState extends State<EventDetail> {
       options: CarouselOptions(
         height: 400.0,
       ),
-      items: [1, 2, 3, 4, 5]
+      items: Get.find<PartyController>()
+          .partyDetail
+          .partyImages!
           .map((e) => Builder(
                 builder: (BuildContext context) {
                   return Container(
-                    child: Image.asset('assets/images/EventBidding.png'),
+                    child: Image.network("$base_url/$e"),
                   );
                 },
               ))
@@ -96,10 +96,11 @@ class _EventDetailState extends State<EventDetail> {
             padding: EdgeInsets.only(top: 20),
             child: Container(
               height: 100,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  Padding(
+                itemCount: controller.partyDetail.partyImages?.length,
+                itemBuilder: (context, index) {
+                  return Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Center(
                       child: Container(
@@ -122,134 +123,164 @@ class _EventDetailState extends State<EventDetail> {
                           ],
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Image.asset(
-                          'assets/images/EventBidding.png',
-                          fit: BoxFit.fitWidth,
-                        ),
+                        child: Image.network(
+                            "$base_url/${controller.partyDetail.partyImages?[index]}"),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Container(
-                        height: 80,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.2), //color of shadow
-                              spreadRadius: 2, //spread radius
-                              blurRadius: 2, // blur radius
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
-                              //first paramerter of offset is left-right
-                              //second parameter is top to down
-                            ),
-                            //you can set more BoxShadow() here
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(
-                          'assets/images/EventBidding.png',
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Container(
-                        height: 80,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.2), //color of shadow
-                              spreadRadius: 2, //spread radius
-                              blurRadius: 2, // blur radius
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
-                              //first paramerter of offset is left-right
-                              //second parameter is top to down
-                            ),
-                            //you can set more BoxShadow() here
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(
-                          'assets/images/EventBidding.png',
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Container(
-                        height: 80,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.2), //color of shadow
-                              spreadRadius: 2, //spread radius
-                              blurRadius: 2, // blur radius
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
-                              //first paramerter of offset is left-right
-                              //second parameter is top to down
-                            ),
-                            //you can set more BoxShadow() here
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(
-                          'assets/images/EventBidding.png',
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Container(
-                        height: 80,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.2), //color of shadow
-                              spreadRadius: 2, //spread radius
-                              blurRadius: 2, // blur radius
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
-                              //first paramerter of offset is left-right
-                              //second parameter is top to down
-                            ),
-                            //you can set more BoxShadow() here
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(
-                          'assets/images/EventBidding.png',
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
+                // children: [
+                //   Padding(
+                //     padding: EdgeInsets.only(left: 10),
+                //     child: Center(
+                //       child: Container(
+                //         height: 80,
+                //         width: 110,
+                //         decoration: BoxDecoration(
+                //           color: Colors.white,
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.grey
+                //                   .withOpacity(0.2), //color of shadow
+                //               spreadRadius: 2, //spread radius
+                //               blurRadius: 2, // blur radius
+                //               offset:
+                //                   Offset(0, 2), // changes position of shadow
+                //               //first paramerter of offset is left-right
+                //               //second parameter is top to down
+                //             ),
+                //             //you can set more BoxShadow() here
+                //           ],
+                //           borderRadius: BorderRadius.circular(20),
+                //         ),
+                //         child: Image.asset(
+                //           'assets/images/EventBidding.png',
+                //           fit: BoxFit.fitWidth,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // Padding(
+                //   padding: EdgeInsets.only(left: 10),
+                //   child: Center(
+                //     child: Container(
+                //       height: 80,
+                //       width: 110,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey
+                //                 .withOpacity(0.2), //color of shadow
+                //             spreadRadius: 2, //spread radius
+                //             blurRadius: 2, // blur radius
+                //             offset:
+                //                 Offset(0, 2), // changes position of shadow
+                //             //first paramerter of offset is left-right
+                //             //second parameter is top to down
+                //           ),
+                //           //you can set more BoxShadow() here
+                //         ],
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //       child: Image.asset(
+                //         'assets/images/EventBidding.png',
+                //         fit: BoxFit.fitWidth,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.only(left: 10),
+                //   child: Center(
+                //     child: Container(
+                //       height: 80,
+                //       width: 110,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey
+                //                 .withOpacity(0.2), //color of shadow
+                //             spreadRadius: 2, //spread radius
+                //             blurRadius: 2, // blur radius
+                //             offset:
+                //                 Offset(0, 2), // changes position of shadow
+                //             //first paramerter of offset is left-right
+                //             //second parameter is top to down
+                //           ),
+                //           //you can set more BoxShadow() here
+                //         ],
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //       child: Image.asset(
+                //         'assets/images/EventBidding.png',
+                //         fit: BoxFit.fitWidth,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.only(left: 10),
+                //   child: Center(
+                //     child: Container(
+                //       height: 80,
+                //       width: 110,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey
+                //                 .withOpacity(0.2), //color of shadow
+                //             spreadRadius: 2, //spread radius
+                //             blurRadius: 2, // blur radius
+                //             offset:
+                //                 Offset(0, 2), // changes position of shadow
+                //             //first paramerter of offset is left-right
+                //             //second parameter is top to down
+                //           ),
+                //           //you can set more BoxShadow() here
+                //         ],
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //       child: Image.asset(
+                //         'assets/images/EventBidding.png',
+                //         fit: BoxFit.fitWidth,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.only(left: 10),
+                //   child: Center(
+                //     child: Container(
+                //       height: 80,
+                //       width: 110,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey
+                //                 .withOpacity(0.2), //color of shadow
+                //             spreadRadius: 2, //spread radius
+                //             blurRadius: 2, // blur radius
+                //             offset:
+                //                 Offset(0, 2), // changes position of shadow
+                //             //first paramerter of offset is left-right
+                //             //second parameter is top to down
+                //           ),
+                //           //you can set more BoxShadow() here
+                //         ],
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //       child: Image.asset(
+                //         'assets/images/EventBidding.png',
+                //         fit: BoxFit.fitWidth,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                //],
               ),
             ),
           ),
@@ -522,7 +553,9 @@ class _EventDetailState extends State<EventDetail> {
               child: Text("Join Party"),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
 
           ElevatedButton(
             onPressed: () {
@@ -558,16 +591,17 @@ class _EventDetailState extends State<EventDetail> {
               child: Text("Bid on This Party"),
             ),
           ),
-          ElevatedButton(onPressed: () {
-            controller.deleteParty(controller.view_party.id!);
-            controller.usercreated2.forEach((element) {
-              if(element.id == controller.view_party.id!)
-                {
-                  controller.usercreated2.remove(element);
-                }
-            });
-            Navigator.pop(context);
-          }, child: Text("Delete This Party"))
+          ElevatedButton(
+              onPressed: () {
+                controller.deleteParty(controller.view_party.id!);
+                controller.usercreated2.forEach((element) {
+                  if (element.id == controller.view_party.id!) {
+                    controller.usercreated2.remove(element);
+                  }
+                });
+                Navigator.pop(context);
+              },
+              child: Text("Delete This Party"))
           // Padding(
           //   padding: const EdgeInsets.only(top: 30.0),
           //   child: InkWell(
@@ -608,7 +642,6 @@ class _EventDetailState extends State<EventDetail> {
           //         height: 70,
           //       )),
           // ),
-
         ],
       ),
     );

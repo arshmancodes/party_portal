@@ -68,6 +68,11 @@ class _HomeViewPageState extends State<HomeViewPage> {
     super.initState();
     getLocation();
     controller.getParties();
+    Future.delayed(Duration(seconds: 5), () {
+      setState(() {
+        loaded = true;
+      });
+    });
     setState(() {});
     print("Location print ${currentlocation}");
     // future = fetchparties();
