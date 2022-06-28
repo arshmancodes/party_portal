@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart' as form;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +101,12 @@ class PartyController extends GetxController {
   }
 
   void postParty() async {
+    List<String> imagesList = [];
+    party.partyImages?.forEach((element) {
+      imagesList.add(element.toString());
+    });
+    String partyid;
+    party.partyImages = [];
     var json = party.toJson();
     Uri url = Uri.parse('$base_url/party/create');
 
@@ -110,10 +115,43 @@ class PartyController extends GetxController {
           headers: {'Content-Type': 'application/json; charset=UTF-8'},
           body: jsonEncode(json));
       print(response.body);
+      partyid = jsonDecode(response.body)['partyId'];
+      postImages(imagesList, partyid);
     } on Exception catch (e) {
       print(e);
     }
     print(jsonEncode(json));
+  }
+
+  void postImages(List<String> imagesList, String partyId) async {
+    var formData = form.FormData();
+    for (var file in imagesList) {
+      formData.files.add(MapEntry(
+          "partyImage",
+          await form.MultipartFile.fromFile(file,
+              filename: DateTime.now().toIso8601String() + file)));
+    }
+    formData.fields.add(MapEntry("partyId", partyId));
+
+    var response = await dio.post('$base_url/party/updateParty',
+        data: formData,
+        options: form.Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ));
+    print(response.data);
+
+    // Uri img_url = Uri.parse('$base_url/party/updateParty');
+    // var img_response = await http.post(img_url,
+    //     headers: {
+    //       'Content-Type': 'application/json; charset=UTF-8',
+    //     },
+    //     body: jsonEncode({
+    //       'partyId': partyId,
+    //     }));
+
+    // print(partyId);
   }
 
   //postparty function
